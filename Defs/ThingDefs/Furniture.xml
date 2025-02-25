@@ -67,7 +67,9 @@
 			<li>ITab_Storage</li>
 		</inspectorTabs>
 		<building>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
 			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<maxItemsInCell>1000</maxItemsInCell>
 			<fixedStorageSettings>
 				<filter>
 					<categories>

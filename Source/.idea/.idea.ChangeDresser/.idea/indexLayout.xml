@@ -2,8 +2,10 @@
 <project version="4">
   <component name="UserContentModel">
     <attachedFolders>
+      <Path>../../rimworld-changedresser</Path>
       <Path>../../rimworld-changedresser-1.3</Path>
       <Path>../../rimworld-changedresser-1.5</Path>
+      <Path>../../../../SteamLibrary/steamapps/workshop/content/294100/3373064575</Path>
     </attachedFolders>
     <explicitIncludes />
     <explicitExcludes />
