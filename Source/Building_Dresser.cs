@@ -380,60 +380,60 @@ namespace ChangeDresser
             return gotten != null;
         }
 
-        public void HandleThingsOnTop()
-        {
-#if TRADE_DEBUG
-            Log.Warning("Start ChangeDresser.HandleThingsOnTop for " + this.Label + " Spawned: " + this.Spawned);
-#endif
-            if (this.Spawned)
-            {
-                foreach (Thing t in base.Map.thingGrid.ThingsAt(this.Position))
-                {
-#if DEBUG
-                    Log.Warning("ChangeDresser.HandleThingsOnTop - Thing " + t.Label + " Type: " + t.GetType().Name);
-#endif
-                    if (t != null && t != this && !(t is Blueprint) && !(t is Building))
-                    {
-                        if (t is Apparel)
-                        {
-                            this.AddApparel((Apparel)t);
-                        }
-                        else
-                        {
-                            IntVec3 p = t.Position;
-                            p.x = p.x + 1;
-                            t.Position = p;
-                            Log.Warning("Moving " + t.Label);
-                        }
-                    }
-                }
-            }
-#if TRADE_DEBUG
-            Log.Warning("End ChangeDresser.HandleThingsOnTop");
-#endif
-        }
+//         public void HandleThingsOnTop()
+//         {
+// #if TRADE_DEBUG
+//             Log.Warning("Start ChangeDresser.HandleThingsOnTop for " + this.Label + " Spawned: " + this.Spawned);
+// #endif
+//             if (this.Spawned)
+//             {
+//                 foreach (Thing t in base.Map.thingGrid.ThingsAt(this.Position))
+//                 {
+// #if DEBUG
+//                     Log.Warning("ChangeDresser.HandleThingsOnTop - Thing " + t.Label + " Type: " + t.GetType().Name);
+// #endif
+//                     if (t != null && t != this && !(t is Blueprint) && !(t is Building))
+//                     {
+//                         if (t is Apparel)
+//                         {
+//                             this.AddApparel((Apparel)t);
+//                         }
+//                         else
+//                         {
+//                             IntVec3 p = t.Position;
+//                             p.x = p.x + 1;
+//                             t.Position = p;
+//                             Log.Warning("Moving " + t.Label);
+//                         }
+//                     }
+//                 }
+//             }
+// #if TRADE_DEBUG
+//             Log.Warning("End ChangeDresser.HandleThingsOnTop");
+// #endif
+//         }
 
-        public override void Notify_ReceivedThing(Thing newItem)
-        {
-            if (!this.AllowAdds ||
-                !(newItem is Apparel))
-            {
-                DropThing(newItem);
-                return;
-            }
-
-            Apparel a = (Apparel)newItem;
-            base.Notify_ReceivedThing(a);
-            if (!this.StoredApparel.Contains(a))
-            {
-                if (newItem.Spawned)
-                {
-                    newItem.DeSpawn();
-                }
-
-                this.StoredApparel.AddApparel(a);
-            }
-        }
+        // public override void Notify_ReceivedThing(Thing newItem)
+        // {
+        //     if (!this.AllowAdds ||
+        //         !(newItem is Apparel))
+        //     {
+        //         DropThing(newItem);
+        //         return;
+        //     }
+        //
+        //     Apparel a = (Apparel)newItem;
+        //     base.Notify_ReceivedThing(a);
+        //     if (!this.StoredApparel.Contains(a))
+        //     {
+        //         if (newItem.Spawned)
+        //         {
+        //             newItem.DeSpawn();
+        //         }
+        //
+        //         this.StoredApparel.AddApparel(a);
+        //     }
+        // }
 
         private List<Apparel> tempApparelList = null;
 
@@ -590,7 +590,7 @@ namespace ChangeDresser
             if (this.Spawned && base.Map != null)
             {
                 // Fix for an issue where apparel will appear on top of the dresser even though it's already stored inside
-                this.HandleThingsOnTop();
+                // this.HandleThingsOnTop();
             }
 
             /*if (!this.AreStorageSettingsEqual())

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<ThingDef ParentName="ArtableFurnitureBase">
+	<ThingDef ParentName="AdaptiveStorageBase">
 		<defName>ChangeDresser</defName>
 		<label>change dresser</label>
 		<description>A place to store and modify apparel as well as get ready for the morning.</description>
@@ -222,4 +222,16 @@
 			<li>MultiAnalyzer</li>
 		</researchPrerequisites>
 	</ThingDef>
+
+	<AdaptiveStorage.GraphicsDef>
+		<defName>ASF_HayloftGraphicGraphics</defName>
+		<targetDef>ChangeDresser</targetDef>
+		<showContainedItems>false</showContainedItems>
+		<graphicData>
+			<texPath>Hayloft/Hayloft</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+	</AdaptiveStorage.GraphicsDef>
 </Defs>
