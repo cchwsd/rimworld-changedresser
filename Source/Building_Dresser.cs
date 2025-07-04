@@ -14,20 +14,12 @@ namespace ChangeDresser
     public class Building_Dresser : Building_Storage //, IStoreSettingsParent
     {
         public const long THIRTY_SECONDS = TimeSpan.TicksPerMinute / 2;
-
-        public readonly JobDef changeApparelColorJobDef = DefDatabase<JobDef>.GetNamed("ChangeApparelColor", true);
-
-        public readonly JobDef changeApparelColorByLayerJobDef =
-            DefDatabase<JobDef>.GetNamed("ChangeApparelColorByLayer", true);
-
-        public readonly JobDef changeHairStyleJobDef = DefDatabase<JobDef>.GetNamed("ChangeHairStyle", true);
-        public readonly JobDef changeBodyJobDef = DefDatabase<JobDef>.GetNamed("ChangeBody", true);
+        
         public readonly JobDef storeApparelJobDef = DefDatabase<JobDef>.GetNamed("StoreApparel", true);
 
         public readonly JobDef wearApparelFromStorageJobDef =
             DefDatabase<JobDef>.GetNamed("WearApparelFromStorage", true);
-
-        public readonly JobDef changeBodyAlienColor = DefDatabase<JobDef>.GetNamed("ChangeBodyAlienColor", true);
+        
 
         public static JobDef WEAR_APPAREL_FROM_DRESSER_JOB_DEF { get; private set; }
 

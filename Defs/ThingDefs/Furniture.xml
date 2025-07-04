@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<ThingDef ParentName="AdaptiveStorageBase">
+	<ThingDef ParentName="ArtableFurnitureBase">
 		<defName>ChangeDresser</defName>
 		<label>change dresser</label>
 		<description>A place to store and modify apparel as well as get ready for the morning.</description>
@@ -67,9 +67,7 @@
 			<li>ITab_Storage</li>
 		</inspectorTabs>
 		<building>
-			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
 			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
-			<maxItemsInCell>1000</maxItemsInCell>
 			<fixedStorageSettings>
 				<filter>
 					<categories>
@@ -91,65 +89,6 @@
 		<interactionCellOffset>(0,0,1)</interactionCellOffset>
 		<designationCategory>Furniture</designationCategory>
 		<tickerType>Long</tickerType>
-	</ThingDef>
-
-	<ThingDef ParentName="ArtableFurnitureBase">
-		<defName>ChangeMirror</defName>
-		<label>change mirror</label>
-		<description>Apply makeup and cut and dye hair.</description>
-		<thingClass>ChangeDresser.Building_ChangeMirror</thingClass>
-		<graphicData>
-			<texPath>Furniture/ColorChangeDresser_mirror</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
-			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(1,1)</drawSize>
-		</graphicData>
-		<altitudeLayer>BuildingOnTop</altitudeLayer>
-		<passability>Standable</passability>
-		<fillPercent>0.4</fillPercent>
-		<castEdgeShadows>false</castEdgeShadows>
-		<clearBuildingArea>false</clearBuildingArea>
-		<stuffCategories>
-			<li>Metallic</li>
-			<li>Woody</li>
-			<li>Stony</li>
-		</stuffCategories>
-		<costStuffCount>20</costStuffCount>
-		<costList>
-			<Steel>20</Steel>
-		</costList>
-		<defaultPlacingRot>South</defaultPlacingRot>
-		<statBases>
-			<MaxHitPoints>100</MaxHitPoints>
-			<Mass>5</Mass>
-			<WorkToBuild>1500</WorkToBuild>
-			<Flammability>1.0</Flammability>
-			<Beauty>5</Beauty>
-		</statBases>
-		<size>(1,1)</size>
-		<designationHotKey>Misc12</designationHotKey>
-		<staticSunShadowHeight>0.5</staticSunShadowHeight>
-		<surfaceType>None</surfaceType>
-		<canOverlapZones>false</canOverlapZones>
-		<placeWorkers>
-			<li>PlaceWorker_ShowFacilitiesConnections</li>
-		</placeWorkers>
-		<comps>
-			<li Class="CompProperties_Facility">
-				<statOffsets>
-					<Comfort>0.05</Comfort>
-				</statOffsets>
-				<maxSimultaneous>1</maxSimultaneous>
-				<maxDistance>8</maxDistance>
-			</li>
-		</comps>
-		<building>
-			<canPlaceOverWall>true</canPlaceOverWall>
-			<isEdifice>false</isEdifice>
-		</building>
-		<hasInteractionCell>True</hasInteractionCell>
-		<interactionCellOffset>(0,0,1)</interactionCellOffset>
-		<designationCategory>Furniture</designationCategory>
 	</ThingDef>
 
 	<ThingDef ParentName="FurnitureBase">
@@ -222,16 +161,4 @@
 			<li>MultiAnalyzer</li>
 		</researchPrerequisites>
 	</ThingDef>
-
-	<AdaptiveStorage.GraphicsDef>
-		<defName>ASF_HayloftGraphicGraphics</defName>
-		<targetDef>ChangeDresser</targetDef>
-		<showContainedItems>false</showContainedItems>
-		<graphicData>
-			<texPath>Hayloft/Hayloft</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(3,2)</drawSize>
-			<drawRotated>false</drawRotated>
-		</graphicData>
-	</AdaptiveStorage.GraphicsDef>
 </Defs>

@@ -3,9 +3,7 @@
     <name>[KV] Change Dresser</name>
     <author>Kiame Vivacity</author>
 	<supportedVersions>
-		<li>1.0</li>
-		<li>1.1</li>
-		<li>1.2</li>
+		<li>1.6</li>
 	</supportedVersions>
 	<packageId>changedresser.kv.rw</packageId>
 	<url>https://ludeon.com/forums/index.php?topic=41483.0</url>
