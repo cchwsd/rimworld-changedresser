@@ -54,8 +54,8 @@ namespace ChangeDresser.UI
             this.absorbInputAroundWindow = true;
             this.forcePause = true;
             this.closeOnClickedOutside = false;
-
-            foreach (Pawn p in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction.Where<Pawn>(
+            
+            foreach (Pawn p in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists.Where<Pawn>(
                          (Func<Pawn, bool>)(pawn => !pawn.DevelopmentalStage.Baby())))
             {
                 if (p.Faction == Faction.OfPlayer && p.def.race.Humanlike && p.apparel?.LockedApparel?.Count == 0)
@@ -95,7 +95,7 @@ namespace ChangeDresser.UI
         {
             get
             {
-                return PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction.Where<Pawn>(
+                return PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists.Where<Pawn>(
                     (Func<Pawn, bool>)(pawn => !pawn.DevelopmentalStage.Baby()));
             }
         }
