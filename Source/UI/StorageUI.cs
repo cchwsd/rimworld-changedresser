@@ -4,7 +4,6 @@ using UnityEngine;
 using Verse;
 using System;
 using System.Collections.Generic;
-using ChangeDresser.UI.DTO.SelectionWidgetDTOs;
 
 namespace ChangeDresser.UI
 {

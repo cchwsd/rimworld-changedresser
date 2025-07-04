@@ -99,19 +99,6 @@ namespace ChangeDresser
                 DEFAULT_MENDING_SPEED, 1, 60);
 
             l.End();
-
-            if (origPersistColors != PersistApparelOriginalColor &&
-                Current.Game != null && WorldComp.ApparelColorTracker != null)
-            {
-                if (PersistApparelOriginalColor)
-                {
-                    WorldComp.ApparelColorTracker.PersistWornColors();
-                }
-                else
-                {
-                    WorldComp.ApparelColorTracker.Clear();
-                }
-            }
         }
 
         private static void NumberInput(Listing_Standard l, string label, ref float val, ref string buffer, float defaultVal, float min, float max)

@@ -1,5 +1,4 @@
-﻿using ChangeDresser.UI.Enums;
-using ChangeDresser.UI.Util;
+﻿using ChangeDresser.UI.Util;
 using RimWorld;
 // using SaveStorageSettingsUtil;
 using System;
@@ -93,33 +92,6 @@ namespace ChangeDresser
                         }
                     }
                 }
-            }
-        }
-
-        public static IEnumerable<CurrentEditorEnum> GetSupportedEditors(bool isAlien)
-        {
-            yield return CurrentEditorEnum.ChangeDresserApparelColor;
-
-            if (Settings.IncludeColorByLayer)
-            {
-                yield return CurrentEditorEnum.ChangeDresserApparelLayerColor;
-            }
-
-            yield return CurrentEditorEnum.ChangeDresserHair;
-
-            if (Settings.ShowBodyChange)
-            {
-                if (isAlien)
-                {
-                    yield return CurrentEditorEnum.ChangeDresserAlienSkinColor;
-                }
-
-                yield return CurrentEditorEnum.ChangeDresserBody;
-            }
-
-            if (isAlien)
-            {
-                yield return CurrentEditorEnum.ChangeDresserAlienHairColor;
             }
         }
 
@@ -233,7 +205,6 @@ namespace ChangeDresser
 
         private bool DropThing(Thing t, bool makeForbidden = true)
         {
-            WorldComp.ApparelColorTracker.RemoveApparel(t as Apparel);
             return BuildingUtil.DropThing(t, this, this.CurrentMap, makeForbidden);
         }
 
@@ -245,7 +216,6 @@ namespace ChangeDresser
                 {
                     foreach (T t in things)
                     {
-                        WorldComp.ApparelColorTracker.RemoveApparel(t as Apparel);
                         this.DropThing(t, makeForbidden);
                     }
                 }
@@ -280,7 +250,6 @@ namespace ChangeDresser
                 }
 
                 this.StoredApparel.StoredApparelLookup.Clear();
-                WorldComp.ApparelColorTracker.Clear();
             }
             finally
             {
@@ -580,7 +549,6 @@ namespace ChangeDresser
 
         public bool RemoveNoDrop(Apparel a)
         {
-            WorldComp.ApparelColorTracker.RemoveApparel(a);
             return this.StoredApparel.RemoveApparel(a);
         }
 
@@ -652,61 +620,7 @@ namespace ChangeDresser
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn pawn)
         {
-            bool isAlien = AlienRaceUtil.IsAlien(pawn);
             List<FloatMenuOption> list = new List<FloatMenuOption>();
-            if (pawn.apparel.WornApparel.Count > 0)
-            {
-                list.Add(new FloatMenuOption(
-                    "ChangeDresser.ChangeApparelColors".Translate(),
-                    delegate
-                    {
-                        Job job = new Job(changeApparelColorJobDef, this);
-                        pawn.jobs.TryTakeOrderedJob(job);
-                    }));
-                if (Settings.IncludeColorByLayer)
-                {
-                    list.Add(new FloatMenuOption(
-                        "ChangeDresser.ChangeApparelColorsByLayer".Translate(),
-                        delegate
-                        {
-                            Job job = new Job(changeApparelColorByLayerJobDef, this);
-                            pawn.jobs.TryTakeOrderedJob(job);
-                        }));
-                }
-            }
-
-            if (!isAlien || AlienRaceUtil.HasHair(pawn))
-            {
-                list.Add(new FloatMenuOption(
-                    "ChangeDresser.ChangeHair".Translate(),
-                    delegate
-                    {
-                        Job job = new Job(changeHairStyleJobDef, this);
-                        pawn.jobs.TryTakeOrderedJob(job);
-                    }));
-            }
-
-            if (Settings.ShowBodyChange)
-            {
-                list.Add(new FloatMenuOption(
-                    "ChangeDresser.ChangeBody".Translate(),
-                    delegate
-                    {
-                        Job job = new Job(changeBodyJobDef, this);
-                        pawn.jobs.TryTakeOrderedJob(job);
-                    }));
-
-                if (isAlien)
-                {
-                    list.Add(new FloatMenuOption(
-                        "ChangeDresser.ChangeAlienBodyColor".Translate(),
-                        delegate
-                        {
-                            Job job = new Job(changeBodyAlienColor, this);
-                            pawn.jobs.TryTakeOrderedJob(job);
-                        }));
-                }
-            }
 
             if (pawn.apparel?.LockedApparel?.Count == 0)
             {

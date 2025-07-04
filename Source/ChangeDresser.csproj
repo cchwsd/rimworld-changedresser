@@ -334,10 +334,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlienRaceUtil.cs" />
-    <Compile Include="ApparelColorTracker.cs" />
     <Compile Include="BuildingUtil.cs" />
-    <Compile Include="Building_ChangeMirror.cs" />
     <Compile Include="Building_Dresser.cs" />
     <Compile Include="Building_RepairChangeDresser.cs" />
     <Compile Include="Dialog_Rename.cs" />
@@ -349,7 +346,6 @@
     <Compile Include="DresserJobDriver\JobDriver_StoreApparel.cs" />
     <Compile Include="Components.cs" />
     <Compile Include="DresserJobDriver\JobDriver_WearApparelFromStorage.cs" />
-    <Compile Include="GradientHairColorUtil.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="HarmonyPatches_Bills.cs" />
     <Compile Include="HarmonyPatches_WealthWatcher.cs" />
@@ -363,25 +359,6 @@
     <Compile Include="StoredApparel.cs" />
     <Compile Include="UI\AssignOutfitUI.cs" />
     <Compile Include="UI\CustomOutfitUI.cs" />
-    <Compile Include="UI\DresserUI.cs" />
-    <Compile Include="UI\DTO\AlienDresserDTO.cs" />
-    <Compile Include="UI\DTO\ColorPresetsDTO.cs" />
-    <Compile Include="UI\DTO\DresserDTO.cs" />
-    <Compile Include="UI\DTO\DresserDtoFactory.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\ApparelLayerSelectionsContainer.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\ApparelColorSelectionsContainer.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\ASelectionWidgetDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\BodyTypeSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\EditorTypeSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\GenderSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\HairColorSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\HairStyleSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\HeadTypeSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\PawnSelectionWidgetDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\SelectionColorWidgetDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\SkinColorSelectionDTO.cs" />
-    <Compile Include="UI\DTO\SelectionWidgetDTOs\SliderWidgetDTO.cs" />
-    <Compile Include="UI\Enums\CurrentEditorEnum.cs" />
     <Compile Include="UI\PawnColumnDef_AssignOutfit.cs" />
     <Compile Include="UI\PawnColumnWorker_AssignOutfit.cs" />
     <Compile Include="UI\PawnColumnWorker_LabelWithCustomHead.cs" />

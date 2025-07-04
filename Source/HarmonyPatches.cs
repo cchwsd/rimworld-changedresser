@@ -1,6 +1,4 @@
 ﻿using ChangeDresser.UI;
-using ChangeDresser.UI.DTO;
-using ChangeDresser.UI.Enums;
 using ChangeDresser.UI.Util;
 using HarmonyLib;
 using RimWorld;
@@ -246,34 +244,7 @@ namespace ChangeDresser
 
         #endregion
     }
-
-    [HarmonyPatch(typeof(Pawn_ApparelTracker), "Notify_ApparelAdded")]
-    static class Patch_Pawn_ApparelTracker_Notify_ApparelAdded
-    {
-        static void Prefix(Pawn_ApparelTracker __instance, Apparel apparel)
-        {
-            WorldComp.ApparelColorTracker.PersistColor(apparel);
-            ColorApparel(__instance.pawn, apparel);
-        }
-
-        internal static void ColorApparel(Pawn pawn, Apparel apparel)
-        {
-            if (WorldComp.PawnOutfits.TryGetValue(pawn, out PawnOutfitTracker outfits))
-            {
-                outfits.ApplyApparelColor(apparel);
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Pawn_ApparelTracker), "Notify_ApparelRemoved")]
-    static class Patch_Pawn_ApparelTracker_Notify_ApparelRemoved
-    {
-        static void Postfix(Apparel apparel)
-        {
-            WorldComp.ApparelColorTracker.ResetColor(apparel);
-        }
-    }
-
+    
     [HarmonyPatch(typeof(Pawn), "GetGizmos")]
     static class Patch_Pawn_GetGizmos
     {
@@ -288,7 +259,6 @@ namespace ChangeDresser
                                            __instance.Faction == Faction.OfPlayer && __instance.def.race.Humanlike)) &&
                 WorldComp.HasDressers())
             {
-                bool isAlien = AlienRaceUtil.IsAlien(__instance);
                 l.Add(new Command_Action
                 {
                     icon = WidgetUtil.yesDressFromTexture,
@@ -300,62 +270,8 @@ namespace ChangeDresser
                         {
                             new FloatMenuOption("ChangeDresser.Wearing".Translate(),
                                 delegate() { Find.WindowStack.Add(new StorageUI(__instance)); }),
-                            new FloatMenuOption("ChangeDresser.ChangeApparelColors".Translate(),
-                                delegate()
-                                {
-                                    Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                        CurrentEditorEnum.ChangeDresserApparelColor)));
-                                })
                         };
-                        if (Settings.IncludeColorByLayer)
-                        {
-                            options.Add(new FloatMenuOption("ChangeDresser.ChangeApparelColorsByLayer".Translate(),
-                                delegate()
-                                {
-                                    Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                        CurrentEditorEnum.ChangeDresserApparelLayerColor)));
-                                }));
-                        }
-
-                        if (!isAlien || AlienRaceUtil.HasHair(__instance))
-                        {
-                            options.Add(new FloatMenuOption("ChangeDresser.ChangeHair".Translate(),
-                                delegate()
-                                {
-                                    Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                        CurrentEditorEnum.ChangeDresserHair)));
-                                }));
-                        }
-
-                        if (isAlien && AlienRaceUtil.HasHair(__instance))
-                        {
-                            options.Add(new FloatMenuOption("ChangeDresser.ChangeAlienHairColor".Translate(),
-                                delegate()
-                                {
-                                    Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                        CurrentEditorEnum.ChangeDresserAlienHairColor)));
-                                }));
-                        }
-
-                        if (Settings.ShowBodyChange)
-                        {
-                            options.Add(new FloatMenuOption("ChangeDresser.ChangeBody".Translate(),
-                                delegate()
-                                {
-                                    Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                        CurrentEditorEnum.ChangeDresserBody)));
-                                }));
-                            if (isAlien)
-                            {
-                                options.Add(new FloatMenuOption("ChangeDresser.ChangeAlienBodyColor".Translate(),
-                                    delegate()
-                                    {
-                                        Find.WindowStack.Add(new DresserUI(DresserDtoFactory.Create(__instance, null,
-                                            CurrentEditorEnum.ChangeDresserAlienSkinColor)));
-                                    }));
-                            }
-                        }
-
+                        
                         Find.WindowStack.Add(new FloatMenu(options));
                     }
                 });
