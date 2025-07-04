@@ -163,7 +163,6 @@ namespace ChangeDresser
                             if (d.TryRemoveBestApparel(def, pawn,
                                     out Apparel apparel))
                             {
-                                WorldComp.ApparelColorTracker.RemoveApparel(apparel);
 #if TRACE && SWAP_APPAREL
                                 Log.Warning("            Found : " + apparel.Label);
 #endif

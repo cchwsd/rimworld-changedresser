@@ -106,7 +106,7 @@ namespace ChangeDresser
         private const long THIRTY_SECONDS = 30 * TimeSpan.TicksPerSecond;
         private long lastTick = DateTime.Now.Ticks;
         private long lastSearch = DateTime.Now.Ticks;
-        public override void Tick()
+        protected override void Tick()
         {
             base.TickRare();
             long now = DateTime.Now.Ticks;
