@@ -763,12 +763,12 @@ namespace ChangeDresser
 
     [HarmonyPatch(
         typeof(CaravanExitMapUtility), "ExitMapAndCreateCaravan",
-        new Type[] { typeof(IEnumerable<Pawn>), typeof(Faction), typeof(int), typeof(int), typeof(int), typeof(bool) })]
+        new Type[] { typeof(IEnumerable<Pawn>), typeof(Faction), typeof(PlanetTile), typeof(PlanetTile), typeof(PlanetTile), typeof(bool) })]
     static class Patch_CaravanExitMapUtility_ExitMapAndCreateCaravan
     {
         [HarmonyPriority(Priority.First)]
-        static void Prefix(IEnumerable<Pawn> pawns, Faction faction, int exitFromTile, int directionTile,
-            int destinationTile, bool sendMessage)
+        static void Prefix(IEnumerable<Pawn> pawns, Faction faction, PlanetTile exitFromTile, PlanetTile directionTile,
+            PlanetTile destinationTile, bool sendMessage)
         {
             if (faction == Faction.OfPlayer)
             {
