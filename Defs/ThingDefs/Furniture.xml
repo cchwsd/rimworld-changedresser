@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<ThingDef ParentName="ArtableFurnitureBase">
+	<ThingDef ParentName="StorageShelfBase">
 		<defName>ChangeDresser</defName>
 		<label>change dresser</label>
 		<description>A place to store and modify apparel as well as get ready for the morning.</description>
@@ -84,6 +84,9 @@
 					</categories>
 				</filter>
 			</defaultStorageSettings>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<maxItemsInCell>500</maxItemsInCell>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
 		</building>
 		<hasInteractionCell>True</hasInteractionCell>
 		<interactionCellOffset>(0,0,1)</interactionCellOffset>
