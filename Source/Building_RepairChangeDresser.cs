@@ -42,6 +42,7 @@ namespace ChangeDresser
                 sb.Append("/");
                 sb.Append(BeingRepaird.MaxHitPoints);
             }
+
             return sb.ToString();
         }
 
@@ -53,7 +54,8 @@ namespace ChangeDresser
 
             this.CurrentMap = map;
 
-            foreach (Building_Dresser d in BuildingUtil.FindThingsOfTypeNextTo<Building_Dresser>(base.Map, base.Position, Settings.RepairAttachmentDistance))
+            foreach (Building_Dresser d in BuildingUtil.FindThingsOfTypeNextTo<Building_Dresser>(base.Map,
+                         base.Position, Settings.RepairAttachmentDistance))
             {
                 this.AddDresser(d);
             }
@@ -66,12 +68,12 @@ namespace ChangeDresser
             }
 #endif
 
-            this.compPowerTrader.powerStartedAction = new Action(delegate ()
+            this.compPowerTrader.powerStartedAction = new Action(delegate()
             {
                 this.compPowerTrader.PowerOutput = LOW_POWER_COST;
             });
 
-            this.compPowerTrader.powerStoppedAction = new Action(delegate ()
+            this.compPowerTrader.powerStoppedAction = new Action(delegate()
             {
                 this.StopRepairing();
                 this.compPowerTrader.PowerOutput = 0;
@@ -106,6 +108,7 @@ namespace ChangeDresser
         private const long THIRTY_SECONDS = 30 * TimeSpan.TicksPerSecond;
         private long lastTick = DateTime.Now.Ticks;
         private long lastSearch = DateTime.Now.Ticks;
+
         protected override void Tick()
         {
             base.TickRare();
@@ -182,6 +185,7 @@ namespace ChangeDresser
                 {
                     isSorted = false;
                 }
+
                 n = next;
             }
 
@@ -201,11 +205,13 @@ namespace ChangeDresser
                             break;
                         }
                     }
+
                     if (!inserted)
                     {
                         ordered.AddLast(d);
                     }
                 }
+
                 this.AttachedDressers.Clear();
                 this.AttachedDressers = ordered;
 #if DEBUG
@@ -245,6 +251,7 @@ namespace ChangeDresser
                     }
                 }
             }
+
             for (LinkedListNode<Building_Dresser> n = this.AttachedDressers.First; n != null; n = n.Next)
             {
                 Building_Dresser d = n.Value;
@@ -285,6 +292,7 @@ namespace ChangeDresser
             {
                 return;
             }
+
             this.AttachedDressers.AddLast(dresser);
         }
 
