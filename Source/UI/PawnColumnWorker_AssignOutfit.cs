@@ -8,6 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace ChangeDresser.UI
 {
+    [StaticConstructorOnStartup]
     public class PawnColumnWorker_AssignOutfit : PawnColumnWorker_Checkbox
     {
         private Vector2 cachedOutfitLabelSize;
