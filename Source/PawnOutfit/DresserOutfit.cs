@@ -67,7 +67,7 @@ namespace ChangeDresser
             if (this.Outfit != null)
             {
                 pawn.outfits.CurrentApparelPolicy = this.Outfit;
-                ApparelUtil.OptimizeApparel(pawn);
+                ApparelUtil.GetApparelsAfterNude(pawn);
             }
 
             /*/ Add any previously worn apparel that still can be worn
@@ -264,7 +264,7 @@ namespace ChangeDresser
                 }
             }
             */
-            ApparelUtil.OptimizeApparel(pawn);
+            ApparelUtil.GetApparelsAfterNude(pawn);
             this.isBeingWorn = true;
 #if DRESSER_OUTFIT
             Log.Warning("End DefinedOutfit.Dress");

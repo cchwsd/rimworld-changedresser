@@ -31,6 +31,7 @@ namespace ChangeDresser
             return wornApparel;
         }
 
+        [Obsolete("No Dresser", true)]
         public static void StoreApparelInWorldDresser(List<Apparel> apparel, Pawn pawn)
         {
 #if DRESSER_OUTFIT
@@ -55,41 +56,39 @@ namespace ChangeDresser
 #endif
         }
 
-        static readonly MethodInfo optApparelMI =
-            typeof(JobGiver_OptimizeApparel).GetMethod("TryGiveJob", BindingFlags.Instance | BindingFlags.NonPublic);
-
-        public static void OptimizeApparel(Pawn pawn)
+        public static void StoreApparelInWorld(List<Apparel> apparel, Pawn pawn)
         {
-            if (pawn == null)
+            foreach (Apparel a in apparel)
             {
-                Log.Warning("OptimizeApparel called with a null Pawn.");
-                return; // Exit the method if pawn is null to prevent further errors.
+                if (!WorldComp.StoreApparel(a))
+                {
+                    BuildingUtil.DropThing(a, pawn.Position, pawn.Map, false);
+                }
             }
-
-            GetApparelAfterNude(pawn);
         }
 
-
-        public static void GetApparelAfterNude(Pawn pawn)
+        public static void GetApparelsAfterNude(Pawn pawn)
         {
             if (pawn.outfits == null)
             {
                 return;
             }
+
             if (pawn.Faction != Faction.OfPlayer)
             {
-                return ;
+                return;
             }
+
             if (pawn.IsMutant && pawn.mutant.Def.disableApparel)
-                return ;
+                return;
             if (pawn.IsQuestLodger())
-                return ;
-            
-            
+                return;
+
+
             List<Thing> tmpApparelList = new List<Thing>();
             List<float> wornApparelScores = new List<float>();
             ApparelPolicy currentApparelPolicy = pawn.outfits.CurrentApparelPolicy;
-            
+
             foreach (var map in Find.Maps)
             {
                 map.listerThings.GetAllThings(in tmpApparelList, ThingRequestGroup.Apparel,
@@ -113,8 +112,8 @@ namespace ChangeDresser
             NeededWarmth neededWarmth =
                 PawnApparelGenerator.CalculateNeededWarmth(pawn, pawn.Map.TileInfo.tile,
                     GenLocalDate.Twelfth((Thing)pawn));
-            
-            
+
+
             bool found;
             do
             {
@@ -144,7 +143,7 @@ namespace ChangeDresser
                             if (tmpApparel.def.apparel.developmentalStageFilter.Has(pawn.DevelopmentalStage))
                             {
                                 pawn.apparel.Wear(tmpApparel, dropReplacedApparel: true);
-                                wornApparelScores.Add( JobGiver_OptimizeApparel.ApparelScoreRaw(pawn, tmpApparel));
+                                wornApparelScores.Add(JobGiver_OptimizeApparel.ApparelScoreRaw(pawn, tmpApparel));
                                 found = true;
                                 break; // restart loop from beginning
                             }
@@ -152,7 +151,7 @@ namespace ChangeDresser
                     }
                 }
             } while (found);
-            
+
             // original code
             // for (int index = 0; index < tmpApparelList.Count; ++index)
             // {
