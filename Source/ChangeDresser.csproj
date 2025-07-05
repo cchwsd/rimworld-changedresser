@@ -343,7 +343,6 @@
     <Compile Include="DresserJobDriver\JobDriver_WearApparelFromStorage.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="HarmonyPatches_Bills.cs" />
-    <Compile Include="HarmonyPatches_WealthWatcher.cs" />
     <Compile Include="PawnOutfit\ApparelUtil.cs" />
     <Compile Include="PawnOutfit\DresserOutfit.cs" />
     <Compile Include="PawnOutfit\PawnOutfitTracker.cs" />

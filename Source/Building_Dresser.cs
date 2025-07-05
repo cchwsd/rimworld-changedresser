@@ -3,8 +3,10 @@ using RimWorld;
 // using SaveStorageSettingsUtil;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -27,6 +29,7 @@ namespace ChangeDresser
 
         public bool AllowAdds { get; set; }
 
+        // TODO: stop use storedApparel
         internal readonly StoredApparel StoredApparel;
 
         private Map CurrentMap { get; set; }
@@ -490,15 +493,22 @@ namespace ChangeDresser
             return sb.ToString();
         }
 
-        public IEnumerable<Apparel> Apparel
+        public List<Apparel> Apparel
         {
-            get { return this.StoredApparel.Apparel; }
+            get
+            {
+                List<Thing> things = new List<Thing>();
+                this.Map.listerThings.GetAllThings(
+                    in things,
+                    ThingRequestGroup.Apparel,
+                    validator: thing => !thing.IsForbidden(Faction.OfPlayer),
+                    lookInHaulSources: true
+                );
+                return things.OfType<Apparel>().ToList();
+            }
         }
 
-        public int Count
-        {
-            get { return this.StoredApparel.Count; }
-        }
+        public int Count => this.Apparel.Count;
 
         /// <summary>
         /// DO NOT CHANGE THIS METHOD'S SIGNATURE. IT WILL BREAK MENDING PATCH MOD

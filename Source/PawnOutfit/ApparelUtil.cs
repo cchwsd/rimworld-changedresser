@@ -68,19 +68,20 @@ namespace ChangeDresser
             bool hasDressers = WorldComp.HasDressers(pawn.Map);
             if (hasDressers)
             {
-#if DRESSER_OUTFIT
+#if DRESSER_OUTFIT  
             Log.Warning("Begin OptimizeApparelUtil.OptimizeApparel(Pawn: " + pawn.Name + ")");
 #endif
                 JobGiver_OptimizeApparel apparelOptimizer = new JobGiver_OptimizeApparel();
                 object[] param = new object[] { pawn };
 
                 for (int i = 0; i < 10; ++i)
-                {
+                { 
 #if TRACE && DRESSER_OUTFIT
                 Log.Message(i + " start equip for loop");
 #endif
                     pawn.mindState.nextApparelOptimizeTick = 0;
                     Job job = optApparelMI.Invoke(apparelOptimizer, param) as Job;
+                    Log.Message(job.def + " job def");
 #if TRACE && DRESSER_OUTFIT
                 Log.Message(i + " job is null: " + (string)((job == null) ? "yes" : "no"));
 #endif
