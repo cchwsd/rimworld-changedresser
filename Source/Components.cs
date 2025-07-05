@@ -81,6 +81,8 @@ namespace ChangeDresser
             return OutfitsForBattle.Contains(outfit) ? OutfitType.Battle : OutfitType.Civilian;
         }
 
+        public static ApparelMapTracker ApparelMapTracker = new ApparelMapTracker();
+
         private static int nextDresserOutfitId = 0;
 
         public static int NextDresserOutfitId
@@ -127,7 +129,36 @@ namespace ChangeDresser
                 OutfitsForBattle = new List<ApparelPolicy>();
             }
         }
+        
+        public static bool StoreApparel(Apparel apparel, Map map = null)
+        {
+            if (apparel == null)
+                return true;
+            if (map == null || apparel.Map == null)
+                return AddApparelAnyDresser(apparel);
 
+            foreach (Building_Dresser d in DressersToUse)
+            {
+                if (d.Map == map && d.settings.AllowedToAccept(apparel))
+                {
+                    d.AddApparel(apparel);
+                    return true;
+                }
+            }
+
+            foreach (Building_Dresser d in DressersToUse)
+            {
+                if (d.Map != map && d.settings.AllowedToAccept(apparel))
+                {
+                    d.AddApparel(apparel);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        [Obsolete("No dresser", true)]
         public static bool AddApparel(Apparel apparel, Map map = null)
         {
             if (apparel == null)
@@ -290,6 +321,7 @@ namespace ChangeDresser
 
             Scribe_Values.Look<int>(ref nextDresserOutfitId, "nextDresserOutfitId", 0);
             Scribe_Collections.Look(ref this.tempPawnOutfits, "pawnOutfits", LookMode.Deep, new object[0]);
+            Scribe_Deep.Look(ref ApparelMapTracker, "apparelColorTrack");
 
             List<ApparelPolicy> ofb = OutfitsForBattle;
             Scribe_Collections.Look(ref ofb, "outfitsForBattle", LookMode.Reference, new object[0]);
@@ -326,6 +358,13 @@ namespace ChangeDresser
                         OutfitsForBattle.RemoveAt(i);
                     }
                 }
+
+                if (ApparelMapTracker == null)
+                {
+                    ApparelMapTracker = new ApparelMapTracker();
+                }
+
+                ApparelMapTracker.Clean();
             }
 
             if (this.tempPawnOutfits != null &&
