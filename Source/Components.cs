@@ -173,13 +173,13 @@ namespace ChangeDresser
             
             if (StoreUtility.TryFindBestBetterStorageFor(
                     apparel,
-                    carrier: null,
+                    carrier: map.mapPawns.FreeColonists[0], //TODO: dummy colonist?
                     map: map,
                     currentPriority: StoreUtility.CurrentStoragePriorityOf(apparel),
                     faction: Faction.OfPlayer,
                     out IntVec3 destCell,
                     out IHaulDestination haulDestination,
-                    needAccurateResult: true // or false if you want faster result
+                    needAccurateResult: true
                 ))
             {
                 int num;

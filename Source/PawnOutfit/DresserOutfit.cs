@@ -81,7 +81,7 @@ namespace ChangeDresser
                 }
             }*/
 
-            ApparelUtil.StoreApparelInWorldDresser(removed, pawn);
+            ApparelUtil.StoreApparelInWorld(removed, pawn);
 
             this.isBeingWorn = true;
 #if DRESSER_OUTFIT
@@ -110,7 +110,7 @@ namespace ChangeDresser
 #if DRESSER_OUTFIT
                     Log.Warning("            -- Not a custom piece of apparel. Storing in Dresser.");
 #endif
-                    if (!WorldComp.AddApparel(a))
+                    if (!WorldComp.StoreApparel(a))
                     {
                         BuildingUtil.DropThing(a, pawn.Position, pawn.Map, false);
                     }
@@ -243,7 +243,7 @@ namespace ChangeDresser
             Log.Warning("Begin DefinedOutfit.Dress(Pawn: " + pawn.Name.ToStringShort + ")");
 #endif
             List<Apparel> removed = ApparelUtil.RemoveApparel(pawn);
-            ApparelUtil.StoreApparelInWorldDresser(removed, pawn);
+            ApparelUtil.StoreApparelInWorld(removed, pawn);
             pawn.outfits.CurrentApparelPolicy = this.Outfit;
 #if DRESSER_OUTFIT
             Log.Message("     Pawn's outfit is now: " + pawn.outfits.CurrentApparelPolicy.label);
@@ -292,7 +292,7 @@ Log.Warning("    Remove Apparel:");
 #if DRESSER_OUTFIT
         Log.Warning("            -- Not a custom piece of apparel. Storing in Dresser.");
 #endif
-                    if (!WorldComp.AddApparel(a))
+                    if (!WorldComp.StoreApparel(a))
                     {
                         BuildingUtil.DropThing(a, pawn.Position, pawn.Map, false);
                     }

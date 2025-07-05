@@ -893,7 +893,7 @@ namespace ChangeDresser
 
                 foreach (Apparel a in po.CustomApparel)
                 {
-                    if (!WorldComp.AddApparel(a))
+                    if (!WorldComp.StoreApparel(a))
                     {
                         BuildingUtil.DropThing(a, __instance.Position, map, true);
                     }

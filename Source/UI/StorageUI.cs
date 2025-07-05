@@ -237,7 +237,7 @@ namespace ChangeDresser.UI
                             {
                                 Apparel a = s.Pop();
                                 this.Pawn.apparel.Remove(a);
-                                if (!WorldComp.AddApparel(a))
+                                if (!WorldComp.StoreApparel(a))
                                 {
                                     if (this.Pawn.Map == null ||
                                         !GenDrop.TryDropSpawn(a, this.Pawn.Position, this.Pawn.Map, ThingPlaceMode.Near, out Thing t))

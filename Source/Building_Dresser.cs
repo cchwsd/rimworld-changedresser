@@ -76,7 +76,7 @@ namespace ChangeDresser
                 }
                 else // Not Allowed
                 {
-                    if (!WorldComp.AddApparel(a))
+                    if (!WorldComp.StoreApparel(a))
                     {
                         if (!a.Spawned)
                         {
@@ -272,7 +272,7 @@ namespace ChangeDresser
                         {
                             if (t is Apparel)
                             {
-                                if (!WorldComp.AddApparel((Apparel)t) &&
+                                if (!WorldComp.StoreApparel((Apparel)t) &&
                                     force &&
                                     t.Spawned)
                                 {

@@ -593,7 +593,7 @@ namespace ChangeDresser
 #if DRESSER_OUTFIT
                 Log.Message("    No Longer Used: " + a.Label);
 #endif
-                if (!WorldComp.AddApparel(a))
+                if (!WorldComp.StoreApparel(a))
                 {
                     if (dresser == null)
                     {

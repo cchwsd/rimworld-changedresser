@@ -66,7 +66,7 @@ namespace ChangeDresser
         public Map GetMap(Apparel a) =>
             a != null && mapLookup?.TryGetValue(a, out var apparelMap) == true
                 ? apparelMap.Map
-                : null;
+                : Find.AnyPlayerHomeMap;
         
         public void RemoveApparel(Apparel a)
         {
