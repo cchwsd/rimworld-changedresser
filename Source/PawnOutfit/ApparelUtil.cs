@@ -65,124 +65,133 @@ namespace ChangeDresser
                 Log.Warning("OptimizeApparel called with a null Pawn.");
                 return; // Exit the method if pawn is null to prevent further errors.
             }
-            bool hasDressers = WorldComp.HasDressers(pawn.Map);
-            if (hasDressers)
-            {
-#if DRESSER_OUTFIT  
-            Log.Warning("Begin OptimizeApparelUtil.OptimizeApparel(Pawn: " + pawn.Name + ")");
-#endif
-                JobGiver_OptimizeApparel apparelOptimizer = new JobGiver_OptimizeApparel();
-                object[] param = new object[] { pawn };
 
-                for (int i = 0; i < 10; ++i)
-                { 
-#if TRACE && DRESSER_OUTFIT
-                Log.Message(i + " start equip for loop");
-#endif
-                    pawn.mindState.nextApparelOptimizeTick = 0;
-                    Job job = optApparelMI.Invoke(apparelOptimizer, param) as Job;
-                    Log.Message(job.def + " job def");
-#if TRACE && DRESSER_OUTFIT
-                Log.Message(i + " job is null: " + (string)((job == null) ? "yes" : "no"));
-#endif
-                    if (job == null)
-                        break;
-                    
-#if TRACE && DRESSER_OUTFIT
-                Log.Message(job.def.defName);
-#endif
-                    if (job.def == JobDefOf.Wear)
-                    {
-                        Apparel a = ((job.targetB != null) ? job.targetB.Thing : null) as Apparel;
-                        if (a == null)
-                        {
-                            Log.Warning(
-                                "ChangeDresser: OptimizeApparelUtil.OptimizeApparel: Problem equiping pawn. Apparel is null.");
-                            break;
-                        }
-#if TRACE && DRESSER_OUTFIT
-                    Log.Message("Wear from ground " + a.Label);
-#endif
-                        if (a.PawnCanWear(pawn, true))
-                        {
-                            pawn.apparel.Wear(a);
-                        }
-                    }
-                    else if (job.def == Building_Dresser.WEAR_APPAREL_FROM_DRESSER_JOB_DEF)
-                    {
-                        Building_Dresser d = ((job.targetA != null) ? job.targetA.Thing : null) as Building_Dresser;
-                        Apparel a = ((job.targetB != null) ? job.targetB.Thing : null) as Apparel;
-
-                        if (d == null || a == null)
-                        {
-                            Log.Warning(
-                                "ChangeDresser: OptimizeApparelUtil.OptimizeApparel: Problem equiping pawn. Dresser or Apparel is null.");
-                            break;
-                        }
-#if TRACE && DRESSER_OUTFIT
-                    Log.Message("Wear from dresser " + d.Label + " " + a.Label);
-#endif
-                        if (a.PawnCanWear(pawn, true))
-                        {
-                            d.RemoveNoDrop(a);
-                            pawn.apparel.Wear(a);
-                        }
-                    }
-#if TRACE && DRESSER_OUTFIT
-                Log.Message(i + " end equip for loop");
-#endif
-                }
-#if DRESSER_OUTFIT
-            Log.Warning("End OptimizeApparelUtil.OptimizeApparel");
-#endif
-            }
-
-            if (!hasDressers || pawn.apparel.WornApparel.Count == 0)
-            {
-                // When pawns are not on the home map they will not get dressed using the game's normal method
-
-                // This logic works but pawns will run back to the dresser to change cloths
-                foreach (ThingDef def in pawn.outfits.CurrentApparelPolicy.filter.AllowedThingDefs)
-                {
-#if TRACE && SWAP_APPAREL
-                    Log.Warning("        Try Find Def " + def.label);
-#endif
-                    if (def == null)
-                    {
-                        continue;
-                    }
-                    if (pawn.apparel.CanWearWithoutDroppingAnything(def))
-                    {
-#if TRACE && SWAP_APPAREL
-                        Log.Warning("        Can Wear. Check Dressers for apparel:");
-#endif
-                        foreach (Building_Dresser d in WorldComp.DressersToUse)
-                        {
-#if TRACE && SWAP_APPAREL
-                            Log.Warning("            " + d.Label);
-#endif
-                            if (d.TryRemoveBestApparel(def, pawn,
-                                    out Apparel apparel))
-                            {
-#if TRACE && SWAP_APPAREL
-                                Log.Warning("            Found : " + apparel.Label);
-#endif
-                                pawn.apparel.Wear(apparel);
-                                break;
-                            }
-#if TRACE && SWAP_APPAREL
-                            else
-                                Log.Warning("            No matching apparel found");
-#endif
-                        }
-                    }
-#if TRACE && SWAP_APPAREL
-                    else
-                        Log.Warning("        Can't wear");
-#endif
-                }
-            }
+            GetApparelAfterNude(pawn);
         }
+
+
+        public static void GetApparelAfterNude(Pawn pawn)
+        {
+            if (pawn.outfits == null)
+            {
+                return;
+            }
+            if (pawn.Faction != Faction.OfPlayer)
+            {
+                return ;
+            }
+            if (pawn.IsMutant && pawn.mutant.Def.disableApparel)
+                return ;
+            if (pawn.IsQuestLodger())
+                return ;
+            
+            
+            List<Thing> tmpApparelList = new List<Thing>();
+            List<float> wornApparelScores = new List<float>();
+            ApparelPolicy currentApparelPolicy = pawn.outfits.CurrentApparelPolicy;
+            
+            foreach (var map in Find.Maps)
+            {
+                map.listerThings.GetAllThings(in tmpApparelList, ThingRequestGroup.Apparel,
+                    lookInHaulSources: true);
+            }
+
+            foreach (IThingHolder thingHolder in pawn.Map.haulDestinationManager.AllHaulSourcesListForReading)
+            {
+                foreach (Thing directlyHeldThing in (IEnumerable<Thing>)thingHolder.GetDirectlyHeldThings())
+                {
+                    if (directlyHeldThing is Apparel apparel)
+                        tmpApparelList.Add((Thing)apparel);
+                }
+            }
+
+            if (tmpApparelList.Count == 0)
+            {
+                return;
+            }
+
+            NeededWarmth neededWarmth =
+                PawnApparelGenerator.CalculateNeededWarmth(pawn, pawn.Map.TileInfo.tile,
+                    GenLocalDate.Twelfth((Thing)pawn));
+            
+            
+            bool found;
+            do
+            {
+                found = false;
+                for (int index = 0; index < tmpApparelList.Count; ++index)
+                {
+                    Apparel tmpApparel = (Apparel)tmpApparelList[index];
+                    if (currentApparelPolicy.filter.Allows((Thing)tmpApparel) && tmpApparel.IsInAnyStorage() &&
+                        !tmpApparel.IsForbidden(pawn) && !tmpApparel.IsBurning() &&
+                        (tmpApparel.def.apparel.gender == Gender.None || tmpApparel.def.apparel.gender == pawn.gender))
+                    {
+                        float num2 = JobGiver_OptimizeApparel.ApparelScoreGain(pawn, tmpApparel, wornApparelScores);
+
+                        if ((double)num2 >= 0.05000000074505806 &&
+                            (!CompBiocodable.IsBiocoded((Thing)tmpApparel) ||
+                             CompBiocodable.IsBiocodedFor((Thing)tmpApparel, pawn)) &&
+                            ApparelUtility.HasPartsToWear(pawn, tmpApparel.def))
+                        {
+                            LocalTargetInfo target = (LocalTargetInfo)(Thing)tmpApparel;
+                            if (tmpApparel.ParentHolder is IApparelSource parentHolder && parentHolder is Thing thing)
+                            {
+                                if (!parentHolder.ApparelSourceEnabled)
+                                    continue;
+                                target = (LocalTargetInfo)thing;
+                            }
+
+                            if (tmpApparel.def.apparel.developmentalStageFilter.Has(pawn.DevelopmentalStage))
+                            {
+                                pawn.apparel.Wear(tmpApparel, dropReplacedApparel: true);
+                                wornApparelScores.Add( JobGiver_OptimizeApparel.ApparelScoreRaw(pawn, tmpApparel));
+                                found = true;
+                                break; // restart loop from beginning
+                            }
+                        }
+                    }
+                }
+            } while (found);
+            
+            // original code
+            // for (int index = 0; index < tmpApparelList.Count; ++index)
+            // {
+            //     Apparel tmpApparel = (Apparel)tmpApparelList[index];
+            //     if (currentApparelPolicy.filter.Allows((Thing)tmpApparel) && tmpApparel.IsInAnyStorage() &&
+            //         !tmpApparel.IsForbidden(pawn) && !tmpApparel.IsBurning() &&
+            //         (tmpApparel.def.apparel.gender == Gender.None || tmpApparel.def.apparel.gender == pawn.gender))
+            //     {
+            //         float num2 = JobGiver_OptimizeApparel.ApparelScoreGain(pawn, tmpApparel,
+            //             wornApparelScores);
+            //
+            //         if ((double)num2 >= 0.05000000074505806 && (double)num2 >= (double)num1 &&
+            //             (!CompBiocodable.IsBiocoded((Thing)tmpApparel) ||
+            //              CompBiocodable.IsBiocodedFor((Thing)tmpApparel, pawn)) &&
+            //             ApparelUtility.HasPartsToWear(pawn, tmpApparel.def))
+            //         {
+            //             LocalTargetInfo target = (LocalTargetInfo)(Thing)tmpApparel;
+            //             if (tmpApparel.ParentHolder is IApparelSource parentHolder && parentHolder is Thing thing)
+            //             {
+            //                 if (parentHolder.ApparelSourceEnabled)
+            //                     target = (LocalTargetInfo)thing;
+            //                 else
+            //                     continue;
+            //             }
+            //
+            //             if (pawn.CanReserveAndReach(target, PathEndMode.OnCell, pawn.NormalMaxDanger()) &&
+            //                 tmpApparel.def.apparel.developmentalStageFilter.Has(pawn.DevelopmentalStage))
+            //             {
+            //                 targetA = (Thing)tmpApparel;
+            //                 num1 = num2;
+            //             }
+            //         }
+            //     }
+            // }
+
+            tmpApparelList.Clear();
+            wornApparelScores.Clear();
+        }
+
 
         public static bool FindBetterApparel(
             ref float baseApparelScore, ref Apparel betterApparel, Pawn pawn, ApparelPolicy currentOutfit,
