@@ -130,29 +130,76 @@ namespace ChangeDresser
             }
         }
         
-        public static bool StoreApparel(Apparel apparel, Map map = null)
+        
+        public static bool TrySpawn(Thing toSpawn, IntVec3 dest, Map map, bool makeForbidden = false)
+        {
+            try
+            {
+                if (!toSpawn.Spawned)
+                {
+                    GenThing.TryDropAndSetForbidden(toSpawn, dest, map, ThingPlaceMode.Direct, out Thing t, makeForbidden);
+                    
+                }
+                if (!toSpawn.Spawned)
+                {
+                    GenPlace.TryPlaceThing(toSpawn, dest, map, ThingPlaceMode.Direct);
+                }
+                if (!toSpawn.Spawned)
+                {
+                    GenPlace.TryPlaceThing(toSpawn, dest, map, ThingPlaceMode.Near);
+                }
+
+                toSpawn.Position = dest;
+
+                return toSpawn.Spawned;
+            }
+            catch (Exception e)
+            {
+                Log.Warning(
+                    "ChangeDresser:BuildingUtil.DropApparel\n" +
+                    e.GetType().Name + " " + e.Message + "\n" +
+                    e.StackTrace);
+            }
+            return false;
+        }
+        
+        public static bool StoreApparel(Apparel apparel)
         {
             if (apparel == null)
                 return true;
-            if (map == null || apparel.Map == null)
-                return AddApparelAnyDresser(apparel);
-
-            foreach (Building_Dresser d in DressersToUse)
+            var map = ApparelMapTracker.GetMap(apparel);
+            if (map == null)
+                return false;
+            
+            if (StoreUtility.TryFindBestBetterStorageFor(
+                    apparel,
+                    carrier: null,
+                    map: map,
+                    currentPriority: StoreUtility.CurrentStoragePriorityOf(apparel),
+                    faction: Faction.OfPlayer,
+                    out IntVec3 destCell,
+                    out IHaulDestination haulDestination,
+                    needAccurateResult: true // or false if you want faster result
+                ))
             {
-                if (d.Map == map && d.settings.AllowedToAccept(apparel))
+                int num;
+                switch (haulDestination)
                 {
-                    d.AddApparel(apparel);
-                    return true;
+                    case ISlotGroupParent _:
+                        TrySpawn(apparel, destCell, map);
+                        return true;
+                    case Thing thing:
+                        TrySpawn(apparel, thing.Position, map);
+                        num = thing.TryGetInnerInteractableThingOwner() != null ? 1 : 0;
+                        break;
+                    default:
+                        TrySpawn(apparel, destCell, map);
+                        num = 0;
+                        break;
                 }
-            }
+                // if (num != 0)
+                //     this.TeleportThingToContainer(t, thing);
 
-            foreach (Building_Dresser d in DressersToUse)
-            {
-                if (d.Map != map && d.settings.AllowedToAccept(apparel))
-                {
-                    d.AddApparel(apparel);
-                    return true;
-                }
             }
 
             return false;
