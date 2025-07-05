@@ -501,7 +501,7 @@ namespace ChangeDresser
                 this.Map.listerThings.GetAllThings(
                     in things,
                     ThingRequestGroup.Apparel,
-                    validator: thing => !thing.IsForbidden(Faction.OfPlayer),
+                    validator: thing => thing.IsInAnyStorage(),
                     lookInHaulSources: true
                 );
                 return things.OfType<Apparel>().ToList();
