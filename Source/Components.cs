@@ -170,7 +170,7 @@ namespace ChangeDresser
             var map = ApparelMapTracker.GetMap(apparel);
             if (map == null)
                 return false;
-            
+            ApparelMapTracker.RemoveApparel(apparel);
             if (StoreUtility.TryFindBestBetterStorageFor(
                     apparel,
                     carrier: map.mapPawns.FreeColonists[0], //TODO: dummy colonist?
@@ -204,50 +204,7 @@ namespace ChangeDresser
 
             return false;
         }
-
-        [Obsolete("No dresser", true)]
-        public static bool AddApparel(Apparel apparel, Map map = null)
-        {
-            if (apparel == null)
-                return true;
-            if (map == null || apparel.Map == null)
-                return AddApparelAnyDresser(apparel);
-
-            foreach (Building_Dresser d in DressersToUse)
-            {
-                if (d.Map == map && d.settings.AllowedToAccept(apparel))
-                {
-                    d.AddApparel(apparel);
-                    return true;
-                }
-            }
-
-            foreach (Building_Dresser d in DressersToUse)
-            {
-                if (d.Map != map && d.settings.AllowedToAccept(apparel))
-                {
-                    d.AddApparel(apparel);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool AddApparelAnyDresser(Apparel apparel)
-        {
-            foreach (Building_Dresser d in DressersToUse)
-            {
-                if (d.settings.AllowedToAccept(apparel))
-                {
-                    d.AddApparel(apparel);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
+        
         public static void AddDresser(Building_Dresser dresser)
         {
             if (dresser == null || dresser.Map == null)
