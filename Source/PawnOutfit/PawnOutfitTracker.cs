@@ -511,6 +511,7 @@ namespace ChangeDresser
                 {
                     if (o.UniqueId.Equals(outfit.UniqueId))
                     {
+                        ApparelUtil.StoreApparelInWorld(o.Apparel, this.Pawn);
                         this.CustomOutfits.Remove(o);
 #if DRESSER_OUTFIT
                         Log.Warning("End PawnOutfitTracker.Remove -- True (CustomOutfits removed)");
@@ -565,49 +566,40 @@ namespace ChangeDresser
 #endif
         }
 
+        [Obsolete("Should saved in CustomOutfit class.", false)]
         public void UpdateCustomApparel(Building_Dresser dresser)
         {
-#if DRESSER_OUTFIT
-            Log.Warning("Begin PawnOutfitTracker.UpdateCustomApparel(Dresser: " + ((dresser == null) ? "<null>" : dresser.Label) + ")");
-#endif
-            List<Apparel> stored = new List<Apparel>(this.customApparel);
-            this.customApparel.Clear();
-            
-            foreach (CustomOutfit o in this.CustomOutfits)
-            {
-                foreach (Apparel a in o.Apparel)
-                {
-                    if (!this.customApparel.Contains(a))
-                    {
-#if DRESSER_OUTFIT
-                        Log.Message("    Add CustomApparel: " + a.Label);
-#endif
-                        this.customApparel.Add(a);
-                    }
-                    stored.Remove(a);
-                }
-            }
 
-            foreach(Apparel a in stored)
-            {
-#if DRESSER_OUTFIT
-                Log.Message("    No Longer Used: " + a.Label);
-#endif
-                if (!WorldComp.StoreApparel(a))
-                {
-                    if (dresser == null)
-                    {
-                        Log.Error("Unable to drop " + a.Label + " on ground.");
-                    }
-                    else
-                    {
-                        BuildingUtil.DropThing(a, dresser, dresser.Map, false);
-                    }
-                }
-            }
-#if DRESSER_OUTFIT
-            Log.Warning("End PawnOutfitTracker.UpdateCustomApparel");
-#endif
+            // List<Apparel> stored = new List<Apparel>(this.customApparel);
+            // this.customApparel.Clear();
+            //
+            // foreach (CustomOutfit o in this.CustomOutfits)
+            // {
+            //     foreach (Apparel a in o.Apparel)
+            //     {
+            //         if (!this.customApparel.Contains(a))
+            //         {
+            //
+            //             this.customApparel.Add(a);
+            //         }
+            //         stored.Remove(a);
+            //     }
+            // }
+            //
+            // foreach(Apparel a in stored)
+            // {
+            //     if (!WorldComp.StoreApparel(a))
+            //     {
+            //         if (dresser == null)
+            //         {
+            //             Log.Error("Unable to drop " + a.Label + " on ground.");
+            //         }
+            //         else
+            //         {
+            //             BuildingUtil.DropThing(a, dresser, dresser.Map, false);
+            //         }
+            //     }
+            // }
         }
 
         public void ExposeData()

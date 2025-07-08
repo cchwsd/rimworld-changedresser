@@ -27,6 +27,8 @@ namespace ChangeDresser
         public List<Apparel> Apparel = new List<Apparel>();
         public string Name = "";
         public ApparelPolicy Outfit = null;
+        
+        
 
         public CustomOutfit() { }
 
@@ -186,7 +188,7 @@ namespace ChangeDresser
             Scribe_Values.Look<string>(ref this.uniqueId, "uniqueId");
             Scribe_References.Look<ApparelPolicy>(ref this.Outfit, "outfit");
 
-            Scribe_Collections.Look<Apparel>(ref this.Apparel,  "apparel", false, LookMode.Reference, new object[0]);
+            Scribe_Collections.Look<Apparel>(ref this.Apparel,  "apparel", false, LookMode.Deep, new object[0]);
         }
 
         public bool IsValid()
