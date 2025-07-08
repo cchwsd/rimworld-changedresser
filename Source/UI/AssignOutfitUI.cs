@@ -114,6 +114,14 @@ namespace ChangeDresser.UI
                 {
                     Find.WindowStack.Add(
                         new Dialog_ManageApparelPolicies(null /*Current.Game.outfitDatabase.DefaultOutfit*/));
+                    // TODO: use this method to refresh outfit settings.
+                    // if (this.Dresser.TryRemove(apparel, false))
+                    // {
+                    //     this.cachedApparel.Clear();
+                    //     this.cachedApparel = null;
+                    //     GUI.EndGroup();
+                    //     break;
+                    // }
                 }
                 
                 if (Widgets.ButtonText(new Rect( /*450*/150 + 20, 0, 150, HEIGHT),

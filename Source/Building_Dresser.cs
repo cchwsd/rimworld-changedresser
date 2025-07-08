@@ -85,28 +85,6 @@ namespace ChangeDresser
             }
         }
 
-        internal int GetApparelCount(ThingDef def, ThingFilter ingredientFilter)
-        {
-            return this.GetApparelCount(def, ingredientFilter.AllowedQualityLevels,
-                ingredientFilter.AllowedHitPointsPercents, ingredientFilter);
-        }
-
-        internal int GetApparelCount(ThingDef def, QualityRange qualityRange, FloatRange hpRange,
-            ThingFilter ingredientFilter)
-        {
-            return this.StoredApparel.GetApparelCount(def, qualityRange, hpRange, ingredientFilter);
-        }
-
-        internal bool TryRemoveApparel(ThingDef def, out Apparel apparel)
-        {
-            return this.StoredApparel.TryRemoveApparel(def, out apparel);
-        }
-
-        public bool TryRemoveBestApparel(ThingDef def, Pawn pawn, out Apparel apparel)
-        {
-            return this.StoredApparel.TryRemoveBestApparel(def, pawn, out apparel);
-        }
-
         public override string Label => (this.Name == "") ? base.Label : this.Name;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -439,7 +417,7 @@ namespace ChangeDresser
                 {
                     if (apparel != null && !apparel.Destroyed && apparel.HitPoints > 0.01)
                     {
-                        this.StoredApparel.AddApparel(apparel);
+                        BuildingUtil.DropThing(apparel, this, this.Map, false);
                     }
                 }
             }
@@ -508,11 +486,13 @@ namespace ChangeDresser
         /// <summary>
         /// DO NOT CHANGE THIS METHOD'S SIGNATURE. IT WILL BREAK MENDING PATCH MOD
         /// </summary>
+        [Obsolete("No StoredApparel Allowed.", true)]
         public void Remove(Apparel a, bool forbidden = true)
         {
             this.TryRemove(a, forbidden);
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool TryRemove(Apparel a, bool forbidden = true)
         {
             try
@@ -544,6 +524,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool RemoveNoDrop(Apparel a)
         {
             return this.StoredApparel.RemoveApparel(a);

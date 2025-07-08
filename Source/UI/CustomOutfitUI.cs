@@ -259,18 +259,7 @@ namespace ChangeDresser.UI
                 this.outfitTracker.UpdateCustomApparel(this.Dresser);
                 foreach(Apparel a in this.customOutfit.Apparel)
                 {
-                    if (!this.Dresser.RemoveNoDrop(a))
-                    {
-#if CUSTOM_OUTFIT_UI
-                        Log.Warning("CustomOutfitUI.DrawBottomButtons -- Save failed to removed [" + a.Label + "] from dresser");
-#endif
-                    }
-#if CUSTOM_OUTFIT_UI
-                    else
-                    {
-                        Log.Warning("CustomOutfitUI.DrawBottomButtons -- Save removed [" + a.Label + "] from dresser");
-                    }
-#endif
+                    a.DeSpawn();
                 }
                 this.customOutfit = null;
             }

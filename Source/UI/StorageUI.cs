@@ -289,23 +289,16 @@ namespace ChangeDresser.UI
                             {
                                 if (Widgets.ButtonImage(buttonRect, WidgetUtil.previousTexture))
                                 {
-                                    if (this.Dresser.TryRemove(apparel, false))
+                                    this.cachedApparel.Clear();
+                                    this.cachedApparel = null;
+                                    PawnOutfitTracker outfits;
+                                    if (WorldComp.PawnOutfits.TryGetValue(this.Pawn, out outfits))
                                     {
-                                        this.cachedApparel.Clear();
-                                        this.cachedApparel = null;
-                                        PawnOutfitTracker outfits;
-                                        if (WorldComp.PawnOutfits.TryGetValue(this.Pawn, out outfits))
-                                        {
-                                            outfits.ApplyApparelColor(apparel);
-                                        }
-                                        this.Pawn.apparel.Wear(apparel);
-                                        GUI.EndGroup();
-                                        break;
+                                        outfits.ApplyApparelColor(apparel);
                                     }
-                                    else
-                                    {
-                                        Log.Error("Problem dropping " + apparel.Label);
-                                    }
+                                    this.Pawn.apparel.Wear(apparel);
+                                    GUI.EndGroup();
+                                    break;
                                 }
                             }
                             else
@@ -327,7 +320,7 @@ namespace ChangeDresser.UI
 
                         if (Widgets.ButtonImage(new Rect(rowRect.width - 45f, 0f, 20, 20), WidgetUtil.dropTexture))
                         {
-                            if (this.Dresser.TryRemove(apparel, false))
+                            if (BuildingUtil.DropThing(apparel, this.Dresser, this.Dresser.Map, false))
                             {
                                 this.cachedApparel.Clear();
                                 this.cachedApparel = null;

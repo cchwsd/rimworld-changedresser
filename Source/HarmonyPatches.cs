@@ -285,34 +285,6 @@ namespace ChangeDresser
             }
         }
     }
-    
-    #region Handle "Do until X" for stored weapons
-
-    [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
-    static class Patch_RecipeWorkerCounter_CountProducts
-    {
-        static void Postfix(ref int __result, RecipeWorkerCounter __instance, Bill_Production bill)
-        {
-            List<ThingDefCountClass> products = __instance.recipe.products;
-            if (WorldComp.DressersToUse.Count > 0 && products != null)
-            {
-                foreach (ThingDefCountClass product in products)
-                {
-                    ThingDef def = product.thingDef;
-                    foreach (Building_Dresser d in WorldComp.DressersToUse)
-                    {
-                        if (bill.Map == d.Map)
-                        {
-                            __result += d.GetApparelCount(def, bill.qualityRange, bill.hpRange,
-                                (bill.limitToAllowedStuff) ? bill.ingredientFilter : null);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    #endregion
 
     // #region Pawn Death
     //

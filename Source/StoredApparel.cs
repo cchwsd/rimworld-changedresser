@@ -44,6 +44,7 @@ namespace ChangeDresser
             }
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public void AddApparel(Apparel apparel)
         {
             if (apparel != null)
@@ -87,6 +88,7 @@ namespace ChangeDresser
             }
         };
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         private static float ApparelScoreRaw(Apparel ap)
         {
             if (ap.def.apparel.blocksVision ||
@@ -118,6 +120,7 @@ namespace ChangeDresser
         }
 
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         private void AddApparelToLinkedList(Apparel apparel, LinkedList<Apparel> l)
         {
 #if DEBUG
@@ -199,6 +202,7 @@ namespace ChangeDresser
             */
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         internal int GetApparelCount(ThingDef expectedDef, QualityRange qualityRange, FloatRange hpRange,
             ThingFilter filter)
         {
@@ -220,6 +224,7 @@ namespace ChangeDresser
             return 0;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         private bool Allows(Thing t, ThingDef expectedDef, QualityRange qualityRange, FloatRange hpRange,
             ThingFilter filter)
         {
@@ -283,6 +288,7 @@ namespace ChangeDresser
             return true;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool Contains(Apparel apparel)
         {
             LinkedList<Apparel> l;
@@ -294,6 +300,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public void Clear()
         {
             foreach (LinkedList<Apparel> l in this.StoredApparelLookup.Values)
@@ -304,6 +311,7 @@ namespace ChangeDresser
             this.StoredApparelLookup.Clear();
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool TryRemoveApparel(ThingDef def, out Apparel apparel)
         {
             LinkedList<Apparel> l;
@@ -321,6 +329,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool TryRemoveBestApparel(ThingDef def, out Apparel apparel)
         {
             LinkedList<Apparel> l;
@@ -338,6 +347,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public bool RemoveApparel(Apparel apparel)
         {
             LinkedList<Apparel> l;
@@ -349,6 +359,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         internal bool TryRemoveBestApparel(ThingDef def, Pawn pawn, out Apparel apparel)
         {
             ThingFilter filter = pawn.outfits.CurrentApparelPolicy.filter;
@@ -399,6 +410,7 @@ namespace ChangeDresser
             return false;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public List<Apparel> RemoveFilteredApparel(StorageSettings settings)
         {
             List<Apparel> removed = new List<Apparel>(0);
