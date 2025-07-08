@@ -190,16 +190,12 @@ namespace ChangeDresser
                         return true;
                     case Thing thing:
                         TrySpawn(apparel, thing.Position, map);
-                        num = thing.TryGetInnerInteractableThingOwner() != null ? 1 : 0;
+                        return true;
                         break;
                     default:
                         TrySpawn(apparel, destCell, map);
-                        num = 0;
-                        break;
+                        return true;
                 }
-                // if (num != 0)
-                //     this.TeleportThingToContainer(t, thing);
-
             }
 
             return false;
