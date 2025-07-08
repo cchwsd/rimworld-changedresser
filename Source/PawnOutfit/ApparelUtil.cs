@@ -123,7 +123,6 @@ namespace ChangeDresser
                         (tmpApparel.def.apparel.gender == Gender.None || tmpApparel.def.apparel.gender == pawn.gender))
                     {
                         float scoreGain = ApparelScoreGainAvoidingAutomaticallyDrop(pawn, tmpApparel, wornApparelScores);
-                        Log.Warning("Try: " + tmpApparel.Label  + "  " + scoreGain);
                         if (((double)scoreGain >= topScoreGain &&
                              (!CompBiocodable.IsBiocoded((Thing)tmpApparel) ||
                               CompBiocodable.IsBiocodedFor((Thing)tmpApparel, pawn)) &&
