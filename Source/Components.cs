@@ -5,6 +5,7 @@ using Verse;
 using System;
 using System.Linq;
 using ChangeDresser.UI;
+using Verse.AI;
 
 namespace ChangeDresser
 {
@@ -24,7 +25,7 @@ namespace ChangeDresser
             }
             private set { PlayFunctionPawnOutfits = value; }
         }
-        
+
         public static Dictionary<Pawn, PawnOutfitTracker> DisfunctionPawnOutfits
         {
             get
@@ -129,21 +130,23 @@ namespace ChangeDresser
                 OutfitsForBattle = new List<ApparelPolicy>();
             }
         }
-        
-        
+
+
         public static bool TrySpawn(Thing toSpawn, IntVec3 dest, Map map, bool makeForbidden = false)
         {
             try
             {
                 if (!toSpawn.Spawned)
                 {
-                    GenThing.TryDropAndSetForbidden(toSpawn, dest, map, ThingPlaceMode.Direct, out Thing t, makeForbidden);
-                    
+                    GenThing.TryDropAndSetForbidden(toSpawn, dest, map, ThingPlaceMode.Direct, out Thing t,
+                        makeForbidden);
                 }
+
                 if (!toSpawn.Spawned)
                 {
                     GenPlace.TryPlaceThing(toSpawn, dest, map, ThingPlaceMode.Direct);
                 }
+
                 if (!toSpawn.Spawned)
                 {
                     GenPlace.TryPlaceThing(toSpawn, dest, map, ThingPlaceMode.Near);
@@ -160,9 +163,104 @@ namespace ChangeDresser
                     e.GetType().Name + " " + e.Message + "\n" +
                     e.StackTrace);
             }
+
             return false;
         }
-        
+
+
+        // private static readonly Dictionary<Map, Pawn> dummyPawnCache = new Dictionary<Map, Pawn>();
+        //
+        // public static Pawn FirstFreeColonistsOrDummyPawn(Map map)
+        // {
+        //     var freeColonists = map.mapPawns.FreeColonists;
+        //
+        //     if (freeColonists.Count > 0)
+        //     {
+        //         // Remove dummy from cache if it exists
+        //         if (dummyPawnCache.ContainsKey(map))
+        //         {
+        //             dummyPawnCache.Remove(map);
+        //         }
+        //         return freeColonists[0];
+        //     }
+        //
+        //     // No real colonist, use or create dummy pawn
+        //     if (!dummyPawnCache.TryGetValue(map, out Pawn dummy))
+        //     {
+        //         dummy = PawnGenerator.GeneratePawn()
+        //         dummyPawnCache[map] = dummy;
+        //     }
+        //
+        //     return dummyPawnCache[map];
+        // }
+
+        public static bool TryFindBestStorageFor(
+            Thing t,
+            Map map,
+            StoragePriority currentPriority,
+            Faction faction,
+            out IntVec3 foundCell,
+            out IHaulDestination haulDestination)
+        {
+            foundCell = IntVec3.Invalid;
+            haulDestination = null;
+            StoragePriority bestPriority = currentPriority;
+
+            // Check slot group cells (e.g., stockpiles)
+            foreach (var group in map.haulDestinationManager.AllGroupsListInPriorityOrder)
+            {
+                if (!(group.parent is Thing parent) || parent.Faction == faction)
+                {
+                    if (!group.parent.HaulDestinationEnabled) continue;
+                    if (group.Settings.Priority <= bestPriority) continue;
+
+                    if (!group.Settings.AllowedToAccept(t)) continue;
+
+                    foreach (var cell in group.CellsList)
+                    {
+                        if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction))
+                        {
+                            foundCell = cell;
+                            haulDestination = (IHaulDestination)group.parent;
+                            bestPriority = group.Settings.Priority;
+                            return true; // we found a valid one, no need to continue
+                        }
+                    }
+                }
+            }
+
+            // Check non-slot group destinations (e.g., shelves)
+            foreach (var dest in map.haulDestinationManager.AllHaulDestinationsListInPriorityOrder)
+            {
+                if (dest is ISlotGroupParent) continue; // skip slot-based storages
+                if (!dest.HaulDestinationEnabled) continue;
+
+                StoragePriority priority = dest.GetStoreSettings().Priority;
+                if (priority <= bestPriority) continue;
+
+                if (!dest.Accepts(t)) continue;
+
+                if (dest is Thing thing)
+                {
+                    if (thing.Faction != null && thing.Faction != faction) continue;
+
+                    if (thing is IHaulEnroute enroute && enroute.GetSpaceRemainingWithEnroute(t.def) <= 0)
+                        continue;
+
+                    if (map.reservationManager.IsReservedByAnyoneOf(thing, faction))
+                        continue;
+                }
+
+                haulDestination = dest;
+                foundCell = IntVec3.Invalid;
+                bestPriority = priority;
+                return true;
+            }
+
+            return false;
+        }
+
+
         public static bool StoreApparel(Apparel apparel)
         {
             if (apparel == null)
@@ -170,19 +268,19 @@ namespace ChangeDresser
             var map = ApparelMapTracker.GetMap(apparel);
             if (map == null)
                 return false;
+            // var freeColonists = map.mapPawns.FreeColonistsSpawned.ToList();
+            // if (freeColonists.Count > 0)
             ApparelMapTracker.RemoveApparel(apparel);
-            if (StoreUtility.TryFindBestBetterStorageFor(
+
+            if (TryFindBestStorageFor(
                     apparel,
-                    carrier: map.mapPawns.FreeColonists[0], //TODO: dummy colonist?
                     map: map,
-                    currentPriority: StoreUtility.CurrentStoragePriorityOf(apparel),
+                    currentPriority: StoragePriority.Unstored,
                     faction: Faction.OfPlayer,
                     out IntVec3 destCell,
-                    out IHaulDestination haulDestination,
-                    needAccurateResult: true
+                    out IHaulDestination haulDestination
                 ))
             {
-                int num;
                 switch (haulDestination)
                 {
                     case ISlotGroupParent _:
@@ -191,16 +289,15 @@ namespace ChangeDresser
                     case Thing thing:
                         TrySpawn(apparel, thing.Position, map);
                         return true;
-                        break;
                     default:
                         TrySpawn(apparel, destCell, map);
                         return true;
                 }
             }
-
+            Messages.Message("Unable to store apparel: " + apparel.Label + ". No available storage space, will be dropped on the ground.", MessageTypeDefOf.CautionInput, false);
             return false;
         }
-        
+
         public static void AddDresser(Building_Dresser dresser)
         {
             if (dresser == null || dresser.Map == null)
