@@ -637,18 +637,7 @@ namespace ChangeDresser
 
             return list;
         }
-
-        #endregion
-
-        public bool FindBetterApparel(ref float baseApparelScore, ref Apparel betterApparel, Pawn pawn,
-            ApparelPolicy currentOutfit)
-        {
-            return this.StoredApparel.FindBetterApparel(ref baseApparelScore, ref betterApparel, pawn, currentOutfit,
-                this);
-        }
-
-        #region Gizmos
-
+        
         public override IEnumerable<Gizmo> GetGizmos()
         {
             IEnumerable<Gizmo> enumerables = base.GetGizmos();
