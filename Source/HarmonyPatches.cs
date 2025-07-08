@@ -285,31 +285,7 @@ namespace ChangeDresser
             }
         }
     }
-
-
-    /*[HarmonyPatch(
-        typeof(CaravanExitMapUtility), "ExitMapAndCreateCaravan",
-        new Type[] { typeof(IEnumerable<Pawn>), typeof(Faction), typeof(int) })]
-    static class Patch_CaravanExitMapUtility_ExitMapAndCreateCaravan_2
-    {
-        static void Prefix(IEnumerable<Pawn> pawns, Faction faction, int startingTile)
-        {
-            if (faction == Faction.OfPlayer)
-            {
-                List<Pawn> p = new List<Pawn>(pawns);
-                if (p.Count > 0)
-                {
-                    foreach (Building_Dresser d in WorldComp.DressersToUse)
-                    {
-                        d.ReclaimApparel();
-                    }
-                }
-            }
-        }
-    }*/
-
-    #endregion
-
+    
     #region Handle "Do until X" for stored weapons
 
     [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
