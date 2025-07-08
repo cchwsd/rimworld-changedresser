@@ -18,9 +18,6 @@ namespace ChangeDresser
         public const long THIRTY_SECONDS = TimeSpan.TicksPerMinute / 2;
         
         public readonly JobDef storeApparelJobDef = DefDatabase<JobDef>.GetNamed("StoreApparel", true);
-
-        public readonly JobDef wearApparelFromStorageJobDef =
-            DefDatabase<JobDef>.GetNamed("WearApparelFromStorage", true);
         
 
         public static JobDef WEAR_APPAREL_FROM_DRESSER_JOB_DEF { get; private set; }
@@ -51,10 +48,7 @@ namespace ChangeDresser
 
         public Building_Dresser()
         {
-            WEAR_APPAREL_FROM_DRESSER_JOB_DEF = this.wearApparelFromStorageJobDef;
-
             this.StoredApparel = new StoredApparel();
-
             this.AllowAdds = true;
         }
 
