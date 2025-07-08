@@ -63,23 +63,19 @@
 				</linkableFacilities>
 			</li>
 		</comps>
-		<inspectorTabs>
-			<li>ITab_Storage</li>
-		</inspectorTabs>
 		<building>
 			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
 			<fixedStorageSettings>
 				<filter>
-					<categories>
+					<categories Inherit="False">
 						<li>Apparel</li>
 					</categories>
-					<thingDefs />
 				</filter>
 			</fixedStorageSettings>
 			<defaultStorageSettings>
 				<priority>Low</priority>
 				<filter>
-					<categories>
+					<categories Inherit="False">
 						<li>Apparel</li>
 					</categories>
 				</filter>
