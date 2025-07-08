@@ -196,10 +196,7 @@ namespace ChangeDresser
                                     force &&
                                     t.Spawned)
                                 {
-                                    t.DeSpawn();
-                                    if (this.forceAddedApparel == null)
-                                        this.forceAddedApparel = new List<Thing>();
-                                    this.forceAddedApparel.Add(t);
+                                    Messages.Message("Unable to store apparel: " + t.Label + ". No available storage space.", MessageTypeDefOf.CautionInput, false);
                                 }
                             }
                         }

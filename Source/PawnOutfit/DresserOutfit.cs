@@ -188,7 +188,7 @@ namespace ChangeDresser
             Scribe_Values.Look<string>(ref this.uniqueId, "uniqueId");
             Scribe_References.Look<ApparelPolicy>(ref this.Outfit, "outfit");
 
-            Scribe_Collections.Look<Apparel>(ref this.Apparel,  "apparel", false, LookMode.Deep, new object[0]);
+            Scribe_Collections.Look<Apparel>(ref this.Apparel,  "apparel", false, LookMode.Reference, new object[0]);
         }
 
         public bool IsValid()
@@ -208,10 +208,11 @@ namespace ChangeDresser
         {
             get
             {
-                if (this.Apparel != null && this.Apparel.Count > 0)
+                if (this.Apparel != null && this.Apparel.Count > 0 && this.Apparel[0] != null)
                 {
                     return this.Apparel[0].def;
                 }
+                
                 return null;
             }
         }

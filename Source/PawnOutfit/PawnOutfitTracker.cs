@@ -621,12 +621,6 @@ namespace ChangeDresser
             Scribe_Values.Look(ref this.currentlyWorn, "currentlyWorn");
             Scribe_Values.Look(ref this.lastBattleOutfit, "lastBattleOutfit");
             Scribe_Values.Look(ref this.lastCivilianOutfit, "lastCivilianOutfit");
-			
-            if (Scribe.mode == LoadSaveMode.Saving || 
-                Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                this.UpdateCustomApparel(null);
-            }
 
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{

@@ -97,6 +97,18 @@ namespace ChangeDresser
                         tmpApparelList.Add((Thing)apparel);
                 }
             }
+            
+            var ocuppiedApparels = new HashSet<Apparel>();
+            foreach (var tracker in WorldComp.PawnOutfits.Values)
+            {
+                foreach (var outfit in tracker.CustomOutfits)
+                {
+                    foreach (var used in outfit.Apparel)
+                    {
+                        ocuppiedApparels.Add(used);
+                    }
+                }
+            }
 
             if (tmpApparelList.Count == 0)
             {
@@ -119,7 +131,7 @@ namespace ChangeDresser
                 {
                     Apparel tmpApparel = (Apparel)tmpApparelList[index];
                     if (currentApparelPolicy.filter.Allows((Thing)tmpApparel) && tmpApparel.IsInAnyStorage() &&
-                        !tmpApparel.IsForbidden(pawn) && !tmpApparel.IsBurning() &&
+                        !tmpApparel.IsForbidden(pawn) && !tmpApparel.IsBurning() && !ocuppiedApparels.Contains(tmpApparel) &&
                         (tmpApparel.def.apparel.gender == Gender.None || tmpApparel.def.apparel.gender == pawn.gender))
                     {
                         float scoreGain = ApparelScoreGainAvoidingAutomaticallyDrop(pawn, tmpApparel, wornApparelScores);
