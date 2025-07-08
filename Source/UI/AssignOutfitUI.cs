@@ -122,15 +122,10 @@ namespace ChangeDresser.UI
                     foreach (var po in WorldComp.DisfunctionPawnOutfits.Values)
                     {
                         Pawn p = po.Pawn;
-                        foreach (Apparel a in po.CustomApparel)
-                        {
-                            this.Dresser.AddApparel(a);
-                        }
+                        ApparelUtil.StoreApparelInWorld(po.CustomApparel.ToList(), p);
                         WorldComp.PawnOutfits.Remove(p);
                     }
                 }
-
-
 
                 Rect scrollViewRect = new Rect(inRect.x, inRect.y + this.ExtraTopSpace + HEIGHT,
                     (int)AssignOutfitUI.WindowsWidth - (18 * 2), this.table.Size.y + this.ExtraBottomSpace);

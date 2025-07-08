@@ -58,6 +58,7 @@ namespace ChangeDresser
             this.AllowAdds = true;
         }
 
+        [Obsolete("No StoredApparel Allowed.", true)]
         public void AddApparel(Apparel a)
         {
 #if DEBUG

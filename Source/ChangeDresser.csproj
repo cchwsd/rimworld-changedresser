@@ -340,7 +340,6 @@
     <Compile Include="Dialog_Rename.cs" />
     <Compile Include="DresserJobDriver\JobDriver_StoreApparel.cs" />
     <Compile Include="Components.cs" />
-    <Compile Include="DresserJobDriver\JobDriver_WearApparelFromStorage.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="HarmonyPatches_Bills.cs" />
     <Compile Include="PawnOutfit\ApparelMapTracker.cs" />

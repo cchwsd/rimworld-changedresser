@@ -211,7 +211,7 @@ namespace ChangeDresser.UI
                             if (Widgets.ButtonImage(buttonRect, WidgetUtil.nextTexture))
                             {
                                 this.Pawn.apparel.Remove(apparel);
-                                this.Dresser.AddApparel(apparel);
+                                WorldComp.StoreApparel(apparel);
                                 this.cachedApparel.Clear();
                                 this.cachedApparel = null;
                                 GUI.EndGroup();
