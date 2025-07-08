@@ -251,27 +251,27 @@ namespace ChangeDresser
                     }
                 }
             }
-
-            for (LinkedListNode<Building_Dresser> n = this.AttachedDressers.First; n != null; n = n.Next)
-            {
-                Building_Dresser d = n.Value;
-                foreach (LinkedList<Apparel> l in d.StoredApparel.StoredApparelLookup.Values)
-                {
-                    foreach (Apparel a in l)
-                    {
-                        if (a.HitPoints < a.MaxHitPoints &&
-                            !AllApparelBeingRepaired.Contains(a))
-                        {
-                            this.BeingRepaird = a;
-                            AllApparelBeingRepaired.AddLast(a);
-#if AUTO_MENDER
-                            Log.Warning("End RepairChangeDresser.StartRepairing -- " + a.Label);
-#endif
-                            return;
-                        }
-                    }
-                }
-            }
+// TODO: fix repairing
+//             for (LinkedListNode<Building_Dresser> n = this.AttachedDressers.First; n != null; n = n.Next)
+//             {
+//                 Building_Dresser d = n.Value;
+//                 foreach (LinkedList<Apparel> l in d.StoredApparel.StoredApparelLookup.Values)
+//                 {
+//                     foreach (Apparel a in l)
+//                     {
+//                         if (a.HitPoints < a.MaxHitPoints &&
+//                             !AllApparelBeingRepaired.Contains(a))
+//                         {
+//                             this.BeingRepaird = a;
+//                             AllApparelBeingRepaired.AddLast(a);
+// #if AUTO_MENDER
+//                             Log.Warning("End RepairChangeDresser.StartRepairing -- " + a.Label);
+// #endif
+//                             return;
+//                         }
+//                     }
+//                 }
+//             }
 #if AUTO_MENDER
             Log.Warning("End RepairChangeDresser.StartRepairing -- No new repairs to start");
 #endif
