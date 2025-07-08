@@ -35,6 +35,11 @@ namespace ChangeDresser
                     {
                         validApparel.Add(a);
                     }
+                    // add validApparel From CustomOutfit
+                    if (WorldComp.PawnOutfits.TryGetValue(p, out PawnOutfitTracker tracker))
+                    {
+                        validApparel.AddRange(tracker.CustomApparel);
+                    }
                 }
             }
             
@@ -112,7 +117,6 @@ namespace ChangeDresser
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 this.Clear();
-
 
                 if (this.l != null)
                 {
