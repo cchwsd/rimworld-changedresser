@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
     <name>[KV] Change Dresser</name>
-    <author>Kiame Vivacity</author>
+	<author>Kiame Vivacity, あんな</author>
 	<supportedVersions>
-		<li>1.6</li>
+		<li>1.0</li>
+		<li>1.1</li>
+		<li>1.2</li>
+		<li>1.3</li>
+		<li>1.4</li>
+		<li>1.5</li>
 	</supportedVersions>
 	<packageId>changedresser.kv.rw</packageId>
 	<url>https://ludeon.com/forums/index.php?topic=41483.0</url>
-    <description>Adds a dresser and mirror which allow a pawn to change their apparal colors, hair color, skin color, hair style, body type, head type, and gender.
+    <description>Adds a dresser which allow pawns to change their outfit instantly.
 
 Thank you translators!
 Vaniat - Chinese Simplified and Traditional
