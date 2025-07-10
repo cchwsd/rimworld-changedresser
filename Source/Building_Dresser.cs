@@ -474,10 +474,20 @@ namespace ChangeDresser
 
             return list;
         }
+
+        public IEnumerable<Gizmo> getBaseGizmo() {
+            foreach (var gizmo in base.GetGizmos())
+            {
+                if (gizmo is Command_SelectStorage)
+                    continue; // Skip the auto-generated SelectStorageGizmo
+
+                yield return gizmo;
+            }
+        }
         
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            IEnumerable<Gizmo> enumerables = base.GetGizmos();
+            IEnumerable<Gizmo> enumerables = getBaseGizmo();
 
             List<Gizmo> l;
             if (enumerables != null)
