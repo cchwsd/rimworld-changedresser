@@ -247,8 +247,11 @@ namespace ChangeDresser
                     if (thing is IHaulEnroute enroute && enroute.GetSpaceRemainingWithEnroute(t.def) <= 0)
                         continue;
 
-                    if (map.reservationManager.IsReservedByAnyoneOf(thing, faction))
+                    if (map.reservationManager.IsReservedByAnyoneOf(thing, faction) &&
+                        (!(thing is IHaulEnroute enroute2) || enroute2.SpaceRemainingFor(t.def) < 1))
+                    {
                         continue;
+                    }
                 }
 
                 haulDestination = dest;
@@ -268,8 +271,6 @@ namespace ChangeDresser
             var map = ApparelMapTracker.GetMap(apparel);
             if (map == null)
                 return false;
-            // var freeColonists = map.mapPawns.FreeColonistsSpawned.ToList();
-            // if (freeColonists.Count > 0)
             ApparelMapTracker.RemoveApparel(apparel);
 
             if (TryFindBestStorageFor(
