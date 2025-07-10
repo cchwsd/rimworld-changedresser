@@ -42,7 +42,7 @@ namespace ChangeDresser
                 }
             }
         }
-        
+
         // rewrite JobGiver_OptimizeApparel.ApparelScoreGain(pawn, tmpApparel, wornApparelScores)
         public static float ApparelScoreGainAvoidingAutomaticallyDrop(Pawn pawn, Apparel ap, List<float> wornScoresCache)
         {

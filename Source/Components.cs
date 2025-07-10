@@ -11,6 +11,36 @@ namespace ChangeDresser
 {
     public class WorldComp : WorldComponent
     {
+        private static HashSet<Apparel> _cachedCustomApparel = null;
+        
+        public static HashSet<Apparel> CachedCustomApparel
+        {
+            get
+            {
+                if (_cachedCustomApparel == null)
+                {
+                    _cachedCustomApparel = new HashSet<Apparel>();
+                    foreach (var tracker in PawnOutfits.Values)
+                    {
+                        foreach (var outfit in tracker.CustomOutfits)
+                        {
+                            foreach (var Custom in outfit.Apparel)
+                            {
+                                _cachedCustomApparel.Add(Custom);
+                            }
+                        }
+                    }
+                }
+
+                return _cachedCustomApparel;
+            }
+        }
+        
+        public static void InvalidateCachedCustomApparel()
+        {
+            _cachedCustomApparel = null;
+        }
+        
         public static LinkedList<Building_Dresser> DressersToUse { get; private set; }
 
         public static Dictionary<Pawn, PawnOutfitTracker> PawnOutfits { get; private set; }
