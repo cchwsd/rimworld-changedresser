@@ -80,7 +80,12 @@ namespace ChangeDresser.UI
             CreateTable();
             this.table.SetDirty();
         }
-
+        
+        public void RefreshTable()
+        {
+            this.table = this.CreateTable();
+            this.table.SetDirty();
+        }
 
         private PawnTable CreateTable()
         {
@@ -112,16 +117,10 @@ namespace ChangeDresser.UI
             {
                 if (Widgets.ButtonText(new Rect( /*450*/0, 0, 150, HEIGHT), "ChangeDresser.ManageOutfits".Translate()))
                 {
-                    Find.WindowStack.Add(
-                        new Dialog_ManageApparelPolicies(null /*Current.Game.outfitDatabase.DefaultOutfit*/));
-                    // TODO: use this method to refresh outfit settings.
-                    // if (this.Dresser.TryRemove(apparel, false))
-                    // {
-                    //     this.cachedApparel.Clear();
-                    //     this.cachedApparel = null;
-                    //     GUI.EndGroup();
-                    //     break;
-                    // }
+                    Find.WindowStack.Add(new Dialog_ManageApparelPolicies_NotifyOnClose(() =>
+                    {
+                        this.RefreshTable(); // Refresh the table after window closes
+                    }));
                 }
                 
                 if (Widgets.ButtonText(new Rect( /*450*/150 + 20, 0, 150, HEIGHT),
@@ -449,4 +448,22 @@ namespace ChangeDresser.UI
         //     return headerHeight;
         // }
     }
+    
+    public class Dialog_ManageApparelPolicies_NotifyOnClose : Dialog_ManageApparelPolicies
+    {
+        private readonly Action onClose;
+
+        public Dialog_ManageApparelPolicies_NotifyOnClose(Action onClose)
+            : base(null) // or pass a default outfit if needed
+        {
+            this.onClose = onClose;
+        }
+
+        public override void PostClose()
+        {
+            base.PostClose();
+            this.onClose?.Invoke();
+        }
+    }
+
 }
