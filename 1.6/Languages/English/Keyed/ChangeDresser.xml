@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<!-- New for 1.3 -->
+	<ChangeDresserFavoriteColor>Favorite Color</ChangeDresserFavoriteColor>
+	<ChangeDresser.ChangeFavoriteColor>Change Favorite Color</ChangeDresser.ChangeFavoriteColor>
+	<ChangeDresser.BeardStyle>Beard Style</ChangeDresser.BeardStyle>
+	
+	<!-- Window Labels -->
+	<ChangeDresser.DresserLabel>Dresser</ChangeDresser.DresserLabel>
+	<ChangeDresser.ApparelStorageLabel>Apparel Storage</ChangeDresser.ApparelStorageLabel>
+	
+	<!-- Gizmo (Command Button) -->
+	<ChangeDresser.ManageApparel>Manage Apparel</ChangeDresser.ManageApparel>
+	<ChangeDresser.ManageApparelDesc>Manage the apparel in the dresser.</ChangeDresser.ManageApparelDesc>
+	<ChangeDresser.AssignOutfits>Assign Outfits</ChangeDresser.AssignOutfits>
+	<ChangeDresser.AssignOutfitsDesc>Assign Outfits to Pawns for both battle and civilian needs.</ChangeDresser.AssignOutfitsDesc>
+	<ChangeDresser.CustomOutfits>Custom Outfits</ChangeDresser.CustomOutfits>
+	<ChangeDresser.CustomOutfitsDesc>Create Pawn-Specific Outfits for both battle and civilian needs.</ChangeDresser.CustomOutfitsDesc>
+	<ChangeDresser.New>New</ChangeDresser.New>
+	<ChangeDresser.Close>Close</ChangeDresser.Close>
+	<ChangeDresser.Empty>Empty</ChangeDresser.Empty>
+	<ChangeDresser.EmptyDesc>Empty the dresser's contents. Does not include storage group apparel.</ChangeDresser.EmptyDesc>
+	<ChangeDresser.Collect>Collect</ChangeDresser.Collect>
+	<ChangeDresser.CollectDesc>Collect the apparel around the dresser and store it.</ChangeDresser.CollectDesc>
+	<ChangeDresser.ChangeTo>Change To</ChangeDresser.ChangeTo>
+	<ChangeDresser.ChangeToDesc>Change to this outfit.</ChangeDresser.ChangeToDesc>
+	<ChangeDresser.Wearing>Wearing</ChangeDresser.Wearing>
+	<ChangeDresser.WearingDesc>Currently wearing this outfit.</ChangeDresser.WearingDesc>
+	<ChangeDresser.IncludeInTradeDeals>Sell Apparel</ChangeDresser.IncludeInTradeDeals>
+	<ChangeDresser.IncludeInTradeDealsDesc>Toggle whether to include the stored apparel in trade deals.</ChangeDresser.IncludeInTradeDealsDesc>
+	<ChangeDresser.UseDresserToDressFrom>Dress From</ChangeDresser.UseDresserToDressFrom>
+	<ChangeDresser.UseDresserToDressFromDesc>Allows pawns to remove apparel from this dresser (disable on dump dressers to improve performance)</ChangeDresser.UseDresserToDressFromDesc>
+	<ChangeDresser.UseDresser>Use Dresser</ChangeDresser.UseDresser>
+	<ChangeDresser.RenameLabel>Rename Dresser</ChangeDresser.RenameLabel>
+	<ChangeDresser.FindMissingApparel>Find Missing Apparel</ChangeDresser.FindMissingApparel>
+	
+	<!-- Common Strings -->
+	<ChangeDresser.Worn>Worn</ChangeDresser.Worn>
+	<ChangeDresser.Storage>Storage</ChangeDresser.Storage>
+	<ChangeDresser.Cancel>Cancel</ChangeDresser.Cancel>
+	<ChangeDresser.SelectAll>Select All</ChangeDresser.SelectAll>
+	<ChangeDresser.DeselectAll>Deselect All</ChangeDresser.DeselectAll>
+	<ChangeDresser.SelectPawn>Select Pawn</ChangeDresser.SelectPawn>
+	
+	<!-- Editor Names (top selection bar in the Dresser window) -->
+	<ChangeDresserHair>Hair Style/Color</ChangeDresserHair>
+	<ChangeDresserApparelColor>Apparel Color</ChangeDresserApparelColor>
+	<ChangeDresserApparelLayerColor>Layer Color</ChangeDresserApparelLayerColor>
+	<ChangeDresserBody>Body</ChangeDresserBody>
+	<ChangeDresserAlienSkinColor>Alien Skin Color</ChangeDresserAlienSkinColor>
+	<ChangeDresserAlienHairColor>Alien Hair Color</ChangeDresserAlienHairColor>
+	
+	<!-- Dresser UI -->
+	<ChangeDresser.BodyType>Body Type</ChangeDresser.BodyType>
+	<ChangeDresser.HeadType>Head Type</ChangeDresser.HeadType>
+	<ChangeDresser.SkinColor>Skin Color</ChangeDresser.SkinColor>
+	<ChangeDresser.Gender>Gender</ChangeDresser.Gender>
+	<ChangeDresser.HairStyle>Hair Style</ChangeDresser.HairStyle>
+	<ChangeDresser.AgeBiological>Biological Age</ChangeDresser.AgeBiological>
+	<ChangeDresser.AgeChronological>Chronological Age</ChangeDresser.AgeChronological>
+	<ChangeDresser.AlienPrimarySkinColor>Primary Skin Color</ChangeDresser.AlienPrimarySkinColor>
+	<ChangeDresser.AlienSecondarySkinColor>Secondary Skin Color</ChangeDresser.AlienSecondarySkinColor>
+	<ChangeDresser.AlienPrimaryHairColor>Primary Hair Color</ChangeDresser.AlienPrimaryHairColor>
+	<ChangeDresser.AlienSecondaryHairColor>Secondary Hair Color</ChangeDresser.AlienSecondaryHairColor>
+	<ChangeDresser.SelectPawn>Select Pawn</ChangeDresser.SelectPawn>
+		
+	<!-- Assign Outfits UI -->
+	<ChangeDresser.ManageOutfits>Manage Outfits</ChangeDresser.ManageOutfits>
+	<ChangeDresser.UseForBattle>Use In Battle</ChangeDresser.UseForBattle>
+	<ChangeDresser.AvailableApparel>Available Apparel</ChangeDresser.AvailableApparel>
+	<ChangeDresser.CustomOutfitApparel>Custom Outfit Apparel</ChangeDresser.CustomOutfitApparel>
+	<ChangeDresser.ResetOptions>Reset Options</ChangeDresser.ResetOptions>
+	<ChangeDresser.ResetColonist>Reset Colonists' Outfits</ChangeDresser.ResetColonist>
+	<ChangeDresser.ClearAbsentAndRetrieveApparels>Clear Absent Colonists' Outfits And Retrieve Custom Apparels</ChangeDresser.ClearAbsentAndRetrieveApparels>
+	
+	<!-- Custom Outfit UI -->
+	<ChangeDresser.OutfitName>Name</ChangeDresser.OutfitName>
+	
+	<!-- Game UI -->
+	<ChangeDresser.StoragePriority>Storage Priority</ChangeDresser.StoragePriority>
+	<ChangeDresser.ApparelCount>Pieces of Apparel</ChangeDresser.ApparelCount>
+	<!-- Repair UI -->
+	<ChangeDresser.AttachedDressers>Attached Dressers</ChangeDresser.AttachedDressers>
+	<ChangeDresser.IsMending>Is Mending</ChangeDresser.IsMending>
+	
+	<!-- Color Selection -->
+	<!-- These refer to the Red (R), Green (G), and Blue (B) values for the selected color -->
+	<ChangeDresser.R>R</ChangeDresser.R>
+	<ChangeDresser.G>G</ChangeDresser.G>
+	<ChangeDresser.B>B</ChangeDresser.B>
+	<!-- These refer to the Hue (H), Saturation (S), and Lightness (L) values for the selected color -->
+	<ChangeDresser.H>Hue</ChangeDresser.H>
+	<ChangeDresser.S>Saturation</ChangeDresser.S>
+	<ChangeDresser.L>Lightness</ChangeDresser.L>
+	
+	<!-- Help Text -->
+	<ChangeDresser.RemoveToEnableDelete>Remove All Apparel To Enable Delete</ChangeDresser.RemoveToEnableDelete>
+	<ChangeDresser.GenderChangeWarning>Changing these values may have adverse effects.\nUse at own risk.</ChangeDresser.GenderChangeWarning>
+	<ChangeDresser.SelectMultipleApparel>Hold Shift and click another\nitem to select multiple.</ChangeDresser.SelectMultipleApparel>
+	<ChangeDresser.ColorPresetHelp>Change: Hold shift and select a preset.\nUnselect: Hold shift and select the same preset.</ChangeDresser.ColorPresetHelp>
+	<ChangeDresser.NoClothingIsWorn>No clothing is being worn.</ChangeDresser.NoClothingIsWorn>
+	<ChangeDresser.NoEditableAttributes>No attributes can be changed for this alien race</ChangeDresser.NoEditableAttributes>
+	
+	<!-- Job Toils -->
+	<ChangeDresser.ChangeApparelColors>Change apparel colors</ChangeDresser.ChangeApparelColors>
+	<ChangeDresser.ChangeApparelColorsByLayer>Change layer colors</ChangeDresser.ChangeApparelColorsByLayer>
+	<ChangeDresser.ChangeHair>Change hair style/color</ChangeDresser.ChangeHair>
+	<ChangeDresser.ChangeBody>Change body attributes</ChangeDresser.ChangeBody>
+	<ChangeDresser.StoreApparel>Store apparel</ChangeDresser.StoreApparel>
+	<ChangeDresser.ChangeAlienBodyColor>Change alien body color</ChangeDresser.ChangeAlienBodyColor>
+	
+	<!-- Error Messages -->
+	<!-- The text after this string is either Hair Color or Apparel Color -->
+	<ChangeDresser.ProblemSavingPreset>Problem while saving Color Presets for</ChangeDresser.ProblemSavingPreset>
+	<!-- The text after this string is either Hair Color or Apparel Color -->
+	<ChangeDresser.ProblemLoadingPreset>Problem while loading Color Presets for</ChangeDresser.ProblemLoadingPreset>
+	<!-- The text before this string is the pawn's name. -->
+	<ChangeDresser.AlreadyHasCombatApparel>already has combat apparel.</ChangeDresser.AlreadyHasCombatApparel>
+	
+	<!-- Mod Settings -->
+	<ChangeDresser>Change Dresser</ChangeDresser>
+	<ChangeDresser.PersistApparelOriginalColor>Persist Apparel Original Color</ChangeDresser.PersistApparelOriginalColor>
+	<ChangeDresser.KeepForcedApparel>Keep Forced Apparel</ChangeDresser.KeepForcedApparel>
+	<ChangeDresser.ShowBodyChange>Allow Body Change</ChangeDresser.ShowBodyChange>
+	<ChangeDresser.ShowGenderAgeChange>Allow Gender and Age Change</ChangeDresser.ShowGenderAgeChange>
+	<ChangeDresser.IncludeColorByLayer>Include Color By Apparel Layer</ChangeDresser.IncludeColorByLayer>
+	<ChangeDresser.ShareHairAcrossGenders>Share Hair Across Genders</ChangeDresser.ShareHairAcrossGenders>
+	<ChangeDresser.MendingAttachmentSettings>Mending-Attachment Settings</ChangeDresser.MendingAttachmentSettings>
+	<ChangeDresser.SecondsBetweenTicks>Seconds Between Ticks</ChangeDresser.SecondsBetweenTicks>
+	<ChangeDresser.HPPerTick>HP Per Tick</ChangeDresser.HPPerTick>
+	<ChangeDresser.ShowDresserButtonForPawns>Show Dresser Button for Pawns</ChangeDresser.ShowDresserButtonForPawns>
+	
+	<!-- Layers -->
+	<OnSkin>On Skin</OnSkin>
+	<Middle>Middle</Middle>
+	<Shell>Shell</Shell>
+	<Belt>Belt</Belt>
+	<Overhead>Overhead</Overhead>
+	<EyeCover>Eye Cover</EyeCover>
+
+	<ChangeDresser.All>All</ChangeDresser.All>
+	<ChangeDresser.Name>Name</ChangeDresser.Name>
+	
+	<!-- Sort -->
+	<ChangeDresser.StorageOrder>Storage Order</ChangeDresser.StorageOrder>
+	<ChangeDresser.DressFromOrder>Dress From Order</ChangeDresser.DressFromOrder>
+	<ChangeDresser.StorageOrderDesc>Change the dresser priority order from which colonists will store and dress apparel.</ChangeDresser.StorageOrderDesc>
+	<ChangeDresser.SortApparel>Sort Apparel</ChangeDresser.SortApparel>
+	<ChangeDresser.SaveFirst>Please save first incase there's an issue and apparel is lost. Contiue?</ChangeDresser.SaveFirst>
+</LanguageData>

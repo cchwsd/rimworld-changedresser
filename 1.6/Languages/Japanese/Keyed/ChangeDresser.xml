@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- New for 1.3 -->
+  <ChangeDresserFavoriteColor>お気に入り色</ChangeDresserFavoriteColor>
+  <ChangeDresser.ChangeFavoriteColor>お気に入り色変更</ChangeDresser.ChangeFavoriteColor>
+  <ChangeDresser.BeardStyle>ヒゲスタイル</ChangeDresser.BeardStyle>
+
+  <!-- Window Labels -->
+  <ChangeDresser.DresserLabel>ドレッサー</ChangeDresser.DresserLabel>
+  <ChangeDresser.ApparelStorageLabel>服装の在庫</ChangeDresser.ApparelStorageLabel>
+
+  <!-- Gizmo (Command Button) -->
+  <ChangeDresser.ManageApparel>衣服管理</ChangeDresser.ManageApparel>
+  <ChangeDresser.ManageApparelDesc>ドレッサーに収納されている衣服を管理します。</ChangeDresser.ManageApparelDesc>
+  <ChangeDresser.AssignOutfits>衣装を割り当てます</ChangeDresser.AssignOutfits>
+  <ChangeDresser.AssignOutfitsDesc>戦闘時と通常時の両方の必要に合わせて、入植者に服装を割り当てます。</ChangeDresser.AssignOutfitsDesc>
+  <ChangeDresser.CustomOutfits>カスタム衣装</ChangeDresser.CustomOutfits>
+  <ChangeDresser.CustomOutfitsDesc>戦闘時と通常時の両方の需要に対応したポーン独自の服装を作成します。</ChangeDresser.CustomOutfitsDesc>
+  <ChangeDresser.New>新規</ChangeDresser.New>
+  <ChangeDresser.Close>閉じる</ChangeDresser.Close>
+  <ChangeDresser.Empty>空にする</ChangeDresser.Empty>
+  <ChangeDresser.EmptyDesc>ドレッサーの中身を空にします。服装グループの在庫は含まれません。</ChangeDresser.EmptyDesc>
+  <ChangeDresser.Collect>収納する</ChangeDresser.Collect>
+  <ChangeDresser.CollectDesc>ドレッサーの周囲に衣服を集めて、それらを収納します。</ChangeDresser.CollectDesc>
+  <ChangeDresser.ChangeTo>着替える:</ChangeDresser.ChangeTo>
+  <ChangeDresser.ChangeToDesc>この衣服に変更します。</ChangeDresser.ChangeToDesc>
+  <ChangeDresser.Wearing>着用中の服装</ChangeDresser.Wearing>
+  <ChangeDresser.WearingDesc>現在この服装を着ています。</ChangeDresser.WearingDesc>
+  <ChangeDresser.IncludeInTradeDeals>衣装を売る</ChangeDresser.IncludeInTradeDeals>
+  <ChangeDresser.IncludeInTradeDealsDesc>保存された衣装を取引の在庫に含めるかどうかを切り替えます。</ChangeDresser.IncludeInTradeDealsDesc>
+  <ChangeDresser.UseDresserToDressFrom>衣服を検索</ChangeDresser.UseDresserToDressFrom>
+  <ChangeDresser.UseDresserToDressFromDesc>ポーンがこのドレッサーに収納された衣服を検索することが可能かどうかを切替えます。(「衣装を売る」を無効にするとパフォーマンスが向上します)</ChangeDresser.UseDresserToDressFromDesc>
+  <ChangeDresser.UseDresser>ドレッサー を使用する</ChangeDresser.UseDresser>
+  <ChangeDresser.RenameLabel>名前を変更</ChangeDresser.RenameLabel>
+
+  <!-- Common Strings -->
+  <ChangeDresser.Worn>装備中</ChangeDresser.Worn>
+  <ChangeDresser.Storage>在庫</ChangeDresser.Storage>
+  <ChangeDresser.Cancel>中止</ChangeDresser.Cancel>
+  <ChangeDresser.SelectAll>全て選択</ChangeDresser.SelectAll>
+  <ChangeDresser.DeselectAll>全て取り消す</ChangeDresser.DeselectAll>
+  <ChangeDresser.SelectPawn>選択ポーン</ChangeDresser.SelectPawn>
+
+  <!-- Editor Names (top selection bar in the Dresser window) -->
+  <ChangeDresserHair>髪型/髪の色</ChangeDresserHair>
+  <ChangeDresserApparelColor>服装の色</ChangeDresserApparelColor>
+  <ChangeDresserApparelLayerColor>Layer Color</ChangeDresserApparelLayerColor>
+  <ChangeDresserBody>身体特徴</ChangeDresserBody>
+  <ChangeDresserAlienSkinColor>追加種族の肌色</ChangeDresserAlienSkinColor>
+  <ChangeDresserAlienHairColor>追加種族の髪色</ChangeDresserAlienHairColor>
+
+  <!-- Dresser UI -->
+  <ChangeDresser.BodyType>体型</ChangeDresser.BodyType>
+  <ChangeDresser.HeadType>顔型</ChangeDresser.HeadType>
+  <ChangeDresser.SkinColor>肌色</ChangeDresser.SkinColor>
+  <ChangeDresser.Gender>性別</ChangeDresser.Gender>
+  <ChangeDresser.HairStyle>髪型</ChangeDresser.HairStyle>
+  <ChangeDresser.AgeBiological>肉体年齢</ChangeDresser.AgeBiological>
+  <ChangeDresser.AgeChronological>暦上年齢</ChangeDresser.AgeChronological>
+  <ChangeDresser.AlienPrimarySkinColor>一番目の肌色</ChangeDresser.AlienPrimarySkinColor>
+  <ChangeDresser.AlienSecondarySkinColor>二番目の肌色</ChangeDresser.AlienSecondarySkinColor>
+  <ChangeDresser.AlienPrimaryHairColor>一番目の髪色</ChangeDresser.AlienPrimaryHairColor>
+  <ChangeDresser.AlienSecondaryHairColor>二番目の髪色</ChangeDresser.AlienSecondaryHairColor>
+  <ChangeDresser.SelectPawn>ポーンを選択</ChangeDresser.SelectPawn>
+
+  <!-- Assign Outfits UI -->
+  <ChangeDresser.ManageOutfits>衣装の管理</ChangeDresser.ManageOutfits>
+  <ChangeDresser.UseForBattle>戦闘で使用</ChangeDresser.UseForBattle>
+  <ChangeDresser.AvailableApparel>利用可能な衣装</ChangeDresser.AvailableApparel>
+  <ChangeDresser.CustomOutfitApparel>カスタム衣装セット</ChangeDresser.CustomOutfitApparel>
+  <ChangeDresser.ResetOptions>リセット設定</ChangeDresser.ResetOptions>
+  <ChangeDresser.ResetColonist>成員の服装をリセット</ChangeDresser.ResetColonist>
+  <ChangeDresser.ClearAbsentAndRetrieveApparels>欠席成員の服装を削除し、カスタム衣装を取り返す</ChangeDresser.ClearAbsentAndRetrieveApparels>
+  
+  <!-- Custom Outfit UI -->
+  <ChangeDresser.OutfitName>名前</ChangeDresser.OutfitName>
+
+  <!-- Game UI -->
+  <ChangeDresser.StoragePriority>在庫の優先順位</ChangeDresser.StoragePriority>
+  <ChangeDresser.ApparelCount>服装の在庫数</ChangeDresser.ApparelCount>
+  <!-- Repair UI -->
+  <ChangeDresser.AttachedDressers>ドレッサーの付属品</ChangeDresser.AttachedDressers>
+  <ChangeDresser.IsMending>修繕する</ChangeDresser.IsMending>
+
+  <!-- Color Selection -->
+  <!-- These refer to the Red (R), Green (G), and Blue (B) values for the selected color -->
+  <ChangeDresser.R>R</ChangeDresser.R>
+  <ChangeDresser.G>G</ChangeDresser.G>
+  <ChangeDresser.B>B</ChangeDresser.B>
+  <!-- These refer to the Hue (H), Saturation (S), and Lightness (L) values for the selected color -->
+  <ChangeDresser.H>色調</ChangeDresser.H>
+  <ChangeDresser.S>彩度</ChangeDresser.S>
+  <ChangeDresser.L>明度</ChangeDresser.L>
+
+  <!-- Help Text -->
+  <ChangeDresser.RemoveToEnableDelete>全ての衣服を外し削除を有効</ChangeDresser.RemoveToEnableDelete>
+  <ChangeDresser.GenderChangeWarning>これらの数値を変更すると悪影響を受ける可能性があります。\n自己責任で使用して下さい。</ChangeDresser.GenderChangeWarning>
+  <ChangeDresser.SelectMultipleApparel>Shiftキーを押して別の物をクリックすると\nアイテムを複数選択できます。</ChangeDresser.SelectMultipleApparel>
+  <ChangeDresser.ColorPresetHelp>変更：Shiftキーを押してプリセット選択\n取消：Shiftキーを押してプリセット選択</ChangeDresser.ColorPresetHelp>
+  <ChangeDresser.NoClothingIsWorn>服装は着用されていません。</ChangeDresser.NoClothingIsWorn>
+  <ChangeDresser.NoEditableAttributes>このエイリアン種族は属性を変更できません</ChangeDresser.NoEditableAttributes>
+
+  <!-- Job Toils -->
+  <ChangeDresser.ChangeApparelColors>服の色を変更</ChangeDresser.ChangeApparelColors>
+  <ChangeDresser.ChangeApparelColorsByLayer>レイヤーの色を変更</ChangeDresser.ChangeApparelColorsByLayer>
+  <ChangeDresser.ChangeHair>髪型や髪色を変更</ChangeDresser.ChangeHair>
+  <ChangeDresser.ChangeBody>体型を変更</ChangeDresser.ChangeBody>
+  <ChangeDresser.StoreApparel>服装の在庫</ChangeDresser.StoreApparel>
+  <ChangeDresser.ChangeAlienBodyColor>エイリアンの体色を変更</ChangeDresser.ChangeAlienBodyColor>
+
+  <!-- Error Messages -->
+  <!-- The text after this string is either Hair Color or Apparel Color -->
+  <ChangeDresser.ProblemSavingPreset>色の設定を保存中にエラーが発生：</ChangeDresser.ProblemSavingPreset>
+  <!-- The text after this string is either Hair Color or Apparel Color -->
+  <ChangeDresser.ProblemLoadingPreset>色の設定を読み込む際にエラーが発生：</ChangeDresser.ProblemLoadingPreset>
+  <!-- The text before this string is the pawn's name. -->
+  <ChangeDresser.AlreadyHasCombatApparel>すでに戦闘服に着替えています。</ChangeDresser.AlreadyHasCombatApparel>
+
+  <!-- Mod Settings -->
+  <ChangeDresser>Change Dresser</ChangeDresser>
+  <ChangeDresser.PersistApparelOriginalColor>衣装の元の色を保持する</ChangeDresser.PersistApparelOriginalColor>
+  <ChangeDresser.KeepForcedApparel>衣装を強制する</ChangeDresser.KeepForcedApparel>
+  <ChangeDresser.ShowBodyChange>体型の変更を許可する</ChangeDresser.ShowBodyChange>
+  <ChangeDresser.ShowGenderAgeChange>性別と年齢の変更を許可する</ChangeDresser.ShowGenderAgeChange>
+  <ChangeDresser.IncludeColorByLayer>衣装レイヤーによる色を含める</ChangeDresser.IncludeColorByLayer>
+  <ChangeDresser.ShareHairAcrossGenders>性別無関係に髪型を共有</ChangeDresser.ShareHairAcrossGenders>
+  <ChangeDresser.MendingAttachmentSettings>修理付属品の設定</ChangeDresser.MendingAttachmentSettings>
+  <ChangeDresser.SecondsBetweenTicks>ティック間の秒数</ChangeDresser.SecondsBetweenTicks>
+  <ChangeDresser.HPPerTick>ティック毎のHP</ChangeDresser.HPPerTick>
+  <ChangeDresser.ShowDresserButtonForPawns>入植者にもドレッサーボタンを表示</ChangeDresser.ShowDresserButtonForPawns>
+
+  <!-- Layers -->
+  <OnSkin>下着</OnSkin>
+  <Middle>中間</Middle>
+  <Shell>上着</Shell>
+  <Belt>装飾品</Belt>
+  <Overhead>帽子</Overhead>
+  <EyeCover>眼</EyeCover>
+
+  <ChangeDresser.All>全て</ChangeDresser.All>
+  <ChangeDresser.Name>名前</ChangeDresser.Name>
+
+  <!-- Sort -->
+  <ChangeDresser.StorageOrder>衣服の保管順</ChangeDresser.StorageOrder>
+  <ChangeDresser.DressFromOrder>着替えの優先順</ChangeDresser.DressFromOrder>
+  <ChangeDresser.StorageOrderDesc>入植者が衣服を保管して着るドレッサーの優先順位を変更します.</ChangeDresser.StorageOrderDesc>
+  <ChangeDresser.SortApparel>衣服ソート</ChangeDresser.SortApparel>
+  <ChangeDresser.SaveFirst>問題が発生して衣服が消失する可能性があるため,最初にセーブしてください.続けますか？</ChangeDresser.SaveFirst>
+
+</LanguageData>

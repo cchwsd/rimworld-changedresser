@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <ChangeDresser.label>ドレッサー(服変更)</ChangeDresser.label>
+  <ChangeDresser.description>服装の色を変更できます。</ChangeDresser.description>
+  <Blueprint_ChangeDresser.label>ドレッサー(設計)</Blueprint_ChangeDresser.label>
+  <Blueprint_Install_ChangeDresser.label>ドレッサー(設計)</Blueprint_Install_ChangeDresser.label>
+  <Frame_ChangeDresser.label>ドレッサー(施工)</Frame_ChangeDresser.label>
+  <Frame_ChangeDresser.description>服装の色を変更できます。</Frame_ChangeDresser.description>
+
+  <ChangeMirror.label>鏡台(髪型と色)</ChangeMirror.label>
+  <ChangeMirror.description>化粧を施して、髪を切ったり染めます。</ChangeMirror.description>
+  <Blueprint_ChangeMirror.label>鏡台(設計)</Blueprint_ChangeMirror.label>
+  <Blueprint_Install_ChangeMirror.label>鏡台(移動先)</Blueprint_Install_ChangeMirror.label>
+  <Frame_ChangeMirror.label>鏡台(施工)</Frame_ChangeMirror.label>
+  <Frame_ChangeMirror.description>化粧を施して、髪を切ったり染めます。</Frame_ChangeMirror.description>
+
+  <RepairChangeDresser.label>修繕用付属品</RepairChangeDresser.label>
+  <RepairChangeDresser.description>離接しているドレッサーに、保管されている衣服を修繕できる機能を追加します。</RepairChangeDresser.description>
+  <Blueprint_RepairChangeDresser.label>修繕用付属品(設計)</Blueprint_RepairChangeDresser.label>
+  <Blueprint_Install_RepairChangeDresser.label>修繕用付属品(移動先)</Blueprint_Install_RepairChangeDresser.label>
+  <Frame_RepairChangeDresser.label>修繕用付属品(施工)</Frame_RepairChangeDresser.label>
+  <Frame_RepairChangeDresser.description>離接しているドレッサーに、保管されている衣服を修繕できる機能を追加します。</Frame_RepairChangeDresser.description>
+
+</LanguageData>
