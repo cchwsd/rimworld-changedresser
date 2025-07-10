@@ -221,7 +221,7 @@ namespace ChangeDresser
                         {
                             reserver.jobs.ReleaseReservations(cell);
                         }
-                        if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction) || true)
+                        if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction))
                         {
                             foundCell = cell;
                             haulDestination = (IHaulDestination)group.parent;
