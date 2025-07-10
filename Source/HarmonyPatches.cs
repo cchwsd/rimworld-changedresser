@@ -47,6 +47,29 @@ namespace ChangeDresser
         }
     }
     
+    [HarmonyPatch(typeof(Thing), "get_Label")]
+    internal static class Apparel_Label_Patch
+    {
+        static void Postfix(Thing __instance, ref string __result)
+        {
+            if (WorldComp.CachedCustomApparel.Contains(__instance))
+            {
+                foreach (var pawnOutfitTracker in WorldComp.PawnOutfits.Values)
+                {
+                    foreach (var customOutfit in pawnOutfitTracker.CustomOutfits)
+                    {
+                        if (customOutfit.Apparel.Contains(__instance))
+                        {
+                            __result = $"[{pawnOutfitTracker.Pawn.NameShortColored}] " + __result;
+                        }
+                    }
+                }
+            }
+                
+        }
+    }
+
+
     [HarmonyPatch(typeof(Thing), "DrawGUIOverlay")]
     internal static class Thing_DrawGUIOverlay_Patch
     {
@@ -60,15 +83,15 @@ namespace ChangeDresser
             return true;
         }
     }
-    
+
     [HarmonyPatch]
     [HarmonyPriority(600)]
     public static class HideStoredThingsFromSectionLayerAndOverlayDrawer
     {
         static IEnumerable<MethodBase> TargetMethods()
         {
-            yield return AccessTools.Method(typeof (SectionLayer_ThingsGeneral), "TakePrintFrom");
-            yield return AccessTools.Method(typeof (OverlayDrawer), "RenderForbiddenOverlay");
+            yield return AccessTools.Method(typeof(SectionLayer_ThingsGeneral), "TakePrintFrom");
+            yield return AccessTools.Method(typeof(OverlayDrawer), "RenderForbiddenOverlay");
         }
 
         [HarmonyPrefix]
@@ -78,11 +101,12 @@ namespace ChangeDresser
             {
                 return false;
             }
+
             return true;
         }
     }
-    
-    [HarmonyPatch(typeof (ThingSelectionUtility), "MultiSelectableThingsInScreenRectDistinct")]
+
+    [HarmonyPatch(typeof(ThingSelectionUtility), "MultiSelectableThingsInScreenRectDistinct")]
     public static class PreventSelectionInRect
     {
         [HarmonyPostfix]
@@ -95,8 +119,8 @@ namespace ChangeDresser
             __result = __result.Where(HideStoredThingsFromSectionLayerAndOverlayDrawer.Prefix);
         }
     }
-    
-    [HarmonyPatch(typeof (Selector), "SelectableObjectsUnderMouse")]
+
+    [HarmonyPatch(typeof(Selector), "SelectableObjectsUnderMouse")]
     public static class PreventSelectionUnderMouse
     {
         [HarmonyPostfix]
@@ -109,8 +133,8 @@ namespace ChangeDresser
             }
         }
     }
-    
-    
+
+
     [HarmonyPatch(typeof(Pawn), "GetGizmos")]
     static class Patch_Pawn_GetGizmos
     {
@@ -137,7 +161,7 @@ namespace ChangeDresser
                             new FloatMenuOption("ChangeDresser.Wearing".Translate(),
                                 delegate() { Find.WindowStack.Add(new StorageUI(__instance)); }),
                         };
-                        
+
                         Find.WindowStack.Add(new FloatMenu(options));
                     }
                 });
@@ -334,6 +358,7 @@ namespace ChangeDresser
                 {
                     return;
                 }
+
                 if (WorldComp.PawnOutfits.TryGetValue(pawn, out PawnOutfitTracker outfits))
                 {
                     if (pawn.Drafted)
@@ -346,6 +371,22 @@ namespace ChangeDresser
                     }
                 }
             }
+        }
+    }
+
+
+    [HarmonyPatch(typeof(JobGiver_OptimizeApparel), "ApparelScoreGain")]
+    static class Patch_JobGiver_OptimizeApparel_ApparelScoreGain
+    {
+        static bool Prefix(Pawn pawn, Apparel ap, List<float> wornScoresCache, ref float __result)
+        {
+            if (WorldComp.CachedCustomApparel.Contains(ap))
+            {
+                __result = -1000;
+                return false;
+            }
+
+            return true;
         }
     }
 
@@ -417,7 +458,7 @@ namespace ChangeDresser
     }
 
     #endregion
-    
+
     // #region Corpse Destroy
     //
     // [HarmonyPatch(typeof(Corpse), "Destroy")]
@@ -450,7 +491,7 @@ namespace ChangeDresser
     // }
     // #endregion
 
-    
+
     // #region Corpse Kill
     //
     // [HarmonyPatch(typeof(Corpse), "Kill")]
@@ -499,7 +540,7 @@ namespace ChangeDresser
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(SettlementAbandonUtility), "Abandon")]
     static class Patch_SettlementAbandonUtility_Abandon
     {
@@ -528,9 +569,8 @@ namespace ChangeDresser
             }
         }
     }
-    
-    
-    
+
+
     // [HarmonyPatch(typeof(ApparelUtility), nameof(ApparelUtility.CanWearTogether))]
     // static class Patch_ApparelUtility_CanWearTogether
     // {
