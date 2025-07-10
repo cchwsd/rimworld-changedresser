@@ -364,6 +364,15 @@ namespace ChangeDresser
             sb.Append(this.includeInTradeDeals.ToString());
             return sb.ToString();
         }
+        
+        public List<Apparel> StoredApparel
+        {
+            get
+            {
+                return this.slotGroup.HeldThings.OfType<Apparel>().ToList();
+            }
+        }
+
 
         public List<Apparel> Apparel
         {
