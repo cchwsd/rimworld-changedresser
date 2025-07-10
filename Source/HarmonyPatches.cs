@@ -5,12 +5,11 @@ using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
 using Verse;
-using Verse.AI;
-using Verse.AI.Group;
 
 namespace ChangeDresser
 {
@@ -47,6 +46,71 @@ namespace ChangeDresser
             return tex;
         }
     }
+    
+    [HarmonyPatch(typeof(Thing), "DrawGUIOverlay")]
+    internal static class Thing_DrawGUIOverlay_Patch
+    {
+        private static bool Prefix(Thing __instance)
+        {
+            if (__instance.StoringThing() is Building_Dresser dresser && __instance != dresser)
+            {
+                Log.Message("Storing thing is not a Building_Dresser");
+                return false;
+            }
+
+            return true;
+        }
+    }
+    
+    [HarmonyPatch]
+    [HarmonyPriority(600)]
+    public static class HideStoredThingsFromSectionLayerAndOverlayDrawer
+    {
+        static IEnumerable<MethodBase> TargetMethods()
+        {
+            yield return AccessTools.Method(typeof (SectionLayer_ThingsGeneral), "TakePrintFrom");
+            yield return AccessTools.Method(typeof (OverlayDrawer), "RenderForbiddenOverlay");
+        }
+
+        [HarmonyPrefix]
+        public static bool Prefix(Thing t)
+        {
+            if (t.StoringThing() is Building_Dresser dresser && t != dresser)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+    
+    [HarmonyPatch(typeof (ThingSelectionUtility), "MultiSelectableThingsInScreenRectDistinct")]
+    public static class PreventSelectionInRect
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref IEnumerable<Thing> __result)
+        {
+            Event current = Event.current;
+            if (current.rawType != EventType.MouseUp || current.button != 0)
+                return;
+
+            __result = __result.Where(HideStoredThingsFromSectionLayerAndOverlayDrawer.Prefix);
+        }
+    }
+    
+    [HarmonyPatch(typeof (Selector), "SelectableObjectsUnderMouse")]
+    public static class PreventSelectionUnderMouse
+    {
+        [HarmonyPostfix]
+        public static IEnumerable<object> Postfix(IEnumerable<object> __result)
+        {
+            foreach (object obj in __result)
+            {
+                if (!(obj is Thing t) || HideStoredThingsFromSectionLayerAndOverlayDrawer.Prefix(t))
+                    yield return obj;
+            }
+        }
+    }
+    
     
     [HarmonyPatch(typeof(Pawn), "GetGizmos")]
     static class Patch_Pawn_GetGizmos
