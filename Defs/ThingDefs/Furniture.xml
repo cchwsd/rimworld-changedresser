@@ -73,7 +73,7 @@
 				</filter>
 			</fixedStorageSettings>
 			<defaultStorageSettings>
-				<priority>Low</priority>
+				<priority>Critical</priority>
 				<filter>
 					<categories Inherit="False">
 						<li>Apparel</li>
@@ -81,7 +81,7 @@
 				</filter>
 			</defaultStorageSettings>
 			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
-			<maxItemsInCell>1</maxItemsInCell>
+			<maxItemsInCell>100</maxItemsInCell>
 			<blueprintClass>Blueprint_Storage</blueprintClass>
 		</building>
 		<hasInteractionCell>True</hasInteractionCell>
