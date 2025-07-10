@@ -81,7 +81,7 @@
 				</filter>
 			</defaultStorageSettings>
 			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
-			<maxItemsInCell>100</maxItemsInCell>
+			<maxItemsInCell>300</maxItemsInCell>
 			<blueprintClass>Blueprint_Storage</blueprintClass>
 		</building>
 		<hasInteractionCell>True</hasInteractionCell>
