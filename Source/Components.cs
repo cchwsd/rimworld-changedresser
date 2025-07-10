@@ -206,7 +206,6 @@ namespace ChangeDresser
             haulDestination = null;
             StoragePriority bestPriority = currentPriority;
 
-            // Check slot group cells (e.g., stockpiles)
             foreach (var group in map.haulDestinationManager.AllGroupsListInPriorityOrder)
             {
                 if (!(group.parent is Thing parent) || parent.Faction == faction)
@@ -218,7 +217,11 @@ namespace ChangeDresser
 
                     foreach (var cell in group.CellsList)
                     {
-                        if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction))
+                        if (map.reservationManager.TryGetReserver(cell, faction, out Pawn reserver))
+                        {
+                            reserver.jobs.ReleaseReservations(cell);
+                        }
+                        if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction) || true)
                         {
                             foundCell = cell;
                             haulDestination = (IHaulDestination)group.parent;
@@ -228,8 +231,7 @@ namespace ChangeDresser
                     }
                 }
             }
-
-            // Check non-slot group destinations (e.g., shelves)
+            
             foreach (var dest in map.haulDestinationManager.AllHaulDestinationsListInPriorityOrder)
             {
                 if (dest is ISlotGroupParent) continue; // skip slot-based storages
@@ -246,9 +248,13 @@ namespace ChangeDresser
 
                     if (thing is IHaulEnroute enroute && enroute.GetSpaceRemainingWithEnroute(t.def) <= 0)
                         continue;
-
-                    if (map.reservationManager.IsReservedByAnyoneOf(thing, faction) &&
-                        (!(thing is IHaulEnroute enroute2) || enroute2.SpaceRemainingFor(t.def) < 1))
+                    
+                    if (map.reservationManager.TryGetReserver(thing, faction, out Pawn reserver))
+                    {
+                        reserver.jobs.ReleaseReservations(thing);
+                    }
+                    
+                    if (map.reservationManager.IsReservedByAnyoneOf(thing, faction))
                     {
                         continue;
                     }
@@ -259,7 +265,6 @@ namespace ChangeDresser
                 bestPriority = priority;
                 return true;
             }
-
             return false;
         }
 
