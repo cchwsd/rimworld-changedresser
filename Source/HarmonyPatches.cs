@@ -54,7 +54,6 @@ namespace ChangeDresser
         {
             if (__instance.StoringThing() is Building_Dresser dresser && __instance != dresser)
             {
-                Log.Message("Storing thing is not a Building_Dresser");
                 return false;
             }
 
