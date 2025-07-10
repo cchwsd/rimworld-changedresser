@@ -95,7 +95,7 @@ namespace ChangeDresser.UI
                     Widgets.ButtonText(new Rect(x, y, 75, 30), "ChangeDresser.New".Translate()))
                 {
                     this.customOutfit = new CustomOutfit();
-                    this.customOutfit.Name = "Custom Outfit";
+                    this.customOutfit.Name = "Custom Outfit " + (this.outfitTracker.CustomOutfits.Count + 1);
                     this.outfitTracker.AddOutfit(this.customOutfit);
                     this.UpdateAvailableApparel();
                 }
@@ -105,7 +105,7 @@ namespace ChangeDresser.UI
                 if (this.customOutfit != null)
                 {
                     Widgets.Label(new Rect(0, y, 60, 30), "ChangeDresser.OutfitName".Translate() + ":");
-                    this.customOutfit.Name = Widgets.TextField(new Rect(70, y, 100, 30), this.customOutfit.Name);
+                    this.customOutfit.Name = Widgets.TextField(new Rect(70, y, 120, 30), this.customOutfit.Name);
                     
                     x = this.DrawUseInBattle(200, y);
                     x = this.DrawBaseOutfit(x, y);
@@ -442,6 +442,7 @@ namespace ChangeDresser.UI
                             {
                                 this.outfitTracker.Remove(o);
                                 this.customOutfit = null;
+                                UpdateAvailableApparel();
                             }
                         }, MenuOptionPriority.Default, null, null, 0f, null, null));
                     }
@@ -481,18 +482,9 @@ namespace ChangeDresser.UI
         public void UpdateAvailableApparel()
         {
             this.availableApparel.Clear();
-            
-            var usedApparel = new HashSet<Apparel>();
-            foreach (var tracker in WorldComp.PawnOutfits.Values)
-            {
-                foreach (var outfit in tracker.CustomOutfits)
-                {
-                    foreach (var used in outfit.Apparel)
-                    {
-                        usedApparel.Add(used);
-                    }
-                }
-            }
+            WorldComp.InvalidateCachedCustomApparel();
+
+            var usedApparel = WorldComp.CachedCustomApparel;
             
             foreach (var apparel in this.Dresser.Apparel)
             {
