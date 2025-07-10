@@ -20,14 +20,22 @@ namespace ChangeDresser.UI
         private PawnSelectionWidgetDTO pawnSelections;
 
         private List<Apparel> cachedApparel = null;
+        
+        private bool showMapApparels = true;
         private List<Apparel> CachedApparel
         {
             get
             {
                 if (this.cachedApparel == null)
                 {
-                    this.cachedApparel = new List<Apparel>(this.Dresser.Count);
-                    this.cachedApparel.AddRange(this.Dresser.Apparel);
+                    if (showMapApparels)
+                    {
+                        this.cachedApparel = new List<Apparel>(this.Dresser.Apparel);
+                    }
+                    else
+                    {
+                        this.cachedApparel = new List<Apparel>(this.Dresser.StoredApparel);
+                    }
                 }
                 return this.cachedApparel;
             }
@@ -133,19 +141,11 @@ namespace ChangeDresser.UI
                 this.Filter = Widgets.TextArea(new Rect(250, 2, 150, 32), this.Filter);
 
                 Text.Anchor = TextAnchor.MiddleCenter;
-                if (Widgets.ButtonText(new Rect(425, 2, 250, 32), ((this.Dresser == null) ? (string)"ChangeDresser".Translate() : this.Dresser.Label)))
+                if (Widgets.ButtonText(new Rect(425, 2, 250, 32), showMapApparels ? "ShowThisDresserApparel".Translate() : "ShowMapApparel".Translate()))
                 {
-                    List<FloatMenuOption> options = new List<FloatMenuOption>();
-                    foreach (Building_Dresser cd in WorldComp.GetDressers(null))
-                    {
-                        options.Add(new FloatMenuOption(cd.Label, delegate ()
-                        {
-                            this.Dresser = cd;
-                            this.cachedApparel?.Clear();
-                            this.cachedApparel = null;
-                        }));
-                    }
-                    Find.WindowStack.Add(new FloatMenu(options));
+                    showMapApparels = !showMapApparels;
+                    this.cachedApparel?.Clear();
+                    this.cachedApparel = null;
                 }
 
                 float outerY = 70;
