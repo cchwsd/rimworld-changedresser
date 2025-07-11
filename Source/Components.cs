@@ -247,11 +247,15 @@ namespace ChangeDresser
 
                     foreach (var cell in group.CellsList)
                     {
-                        if (map.reservationManager.TryGetReserver(cell, faction, out Pawn reserver))
-                        {
-                            reserver.jobs.ReleaseReservations(cell);
-                        }
                         if (StoreUtility.IsGoodStoreCell(cell, map, t, null, faction))
+                        {
+                            foundCell = cell;
+                            haulDestination = (IHaulDestination)group.parent;
+                            bestPriority = group.Settings.Priority;
+                            return true; // we found a valid one, no need to continue
+                        }
+                        
+                        if (group.parent is Building_Storage dresser && dresser.SpaceRemainingFor(t.def) < -1)
                         {
                             foundCell = cell;
                             haulDestination = (IHaulDestination)group.parent;
