@@ -507,6 +507,13 @@ namespace ChangeDresser.UI
 
         private bool CanWear(Apparel apparel)
         {
+            if (CompBiocodable.IsBiocoded((Thing)apparel) &&
+                !CompBiocodable.IsBiocodedFor((Thing)apparel, this.pawn) ||
+                !ApparelUtility.HasPartsToWear(this.pawn, apparel.def) ||
+                !apparel.def.apparel.developmentalStageFilter.Has(this.pawn.DevelopmentalStage))
+            {
+                return false;
+            }
             foreach (Apparel a in this.customOutfit.Apparel)
             {
                 if (!ApparelUtility.CanWearTogether(a.def, apparel.def, this.pawn.RaceProps.body))

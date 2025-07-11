@@ -285,6 +285,9 @@ namespace ChangeDresser.UI
                         {
                             Rect buttonRect = new Rect(5, 10, 20, 20);
                             bool canWear = this.Pawn.apparel.CanWearWithoutDroppingAnything(apparel.def);
+                            canWear &= (!CompBiocodable.IsBiocoded((Thing)apparel) ||
+                                        CompBiocodable.IsBiocodedFor((Thing)apparel, this.Pawn)) &&
+                                       ApparelUtility.HasPartsToWear(this.Pawn, apparel.def) && apparel.def.apparel.developmentalStageFilter.Has(this.Pawn.DevelopmentalStage);
                             if (canWear)
                             {
                                 if (Widgets.ButtonImage(buttonRect, WidgetUtil.previousTexture))
