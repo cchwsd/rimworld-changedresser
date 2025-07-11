@@ -68,6 +68,34 @@ namespace ChangeDresser
                 
         }
     }
+    
+    [HarmonyPatch(typeof (FloatMenuOptionProvider_Wear), "GetSingleOptionFor")]
+    internal static class FloatMenuOptionProvider_Wear_GetSingleOptionFor_Patch
+    {
+        public static bool Prefix(Thing clickedThing, ref FloatMenuOption __result)
+        {
+            if (clickedThing.StoringThing() is Building_Dresser dresser && clickedThing != dresser)
+            {
+                __result = null;
+                return false;
+            }
+            return true;
+        }
+    }
+    
+    [HarmonyPatch(typeof (FloatMenuOptionProvider_DressOtherPawn), "GetSingleOptionFor")]
+    internal static class FloatMenuOptionProvider_DressOtherPawn_GetSingleOptionFor_Patch
+    {
+        public static bool Prefix(Thing clickedThing, ref FloatMenuOption __result)
+        {
+            if (clickedThing.StoringThing() is Building_Dresser dresser && clickedThing != dresser)
+            {
+                __result = null;
+                return false;
+            }
+            return true;
+        }
+    }
 
 
     [HarmonyPatch(typeof(Thing), "DrawGUIOverlay")]
