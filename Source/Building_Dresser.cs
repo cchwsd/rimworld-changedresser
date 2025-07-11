@@ -172,6 +172,14 @@ namespace ChangeDresser
             }
         }
 
+        public void EmptyApparel()
+        {
+            foreach (var apparel in this.StoredApparel)
+            {
+                BuildingUtil.DropThing(apparel, this, this.Map, false);
+            }
+        }
+
         internal void ReclaimApparel(bool force = false)
         {
             if (base.Map == null)
@@ -543,16 +551,16 @@ namespace ChangeDresser
             ++groupKey;
             l.Add(a);
 
-            // a = new Command_Action();
-            // a.icon = WidgetUtil.emptyTexture;
-            // a.defaultDesc = "ChangeDresser.EmptyDesc".Translate();
-            // a.defaultLabel = "ChangeDresser.Empty".Translate();
-            // a.activateSound = SoundDef.Named("Click");
-            // a.action =
-            //     delegate { this.Empty<Apparel>(); };
-            // a.groupKey = groupKey;
-            // ++groupKey;
-            // l.Add(a);
+            a = new Command_Action();
+            a.icon = WidgetUtil.emptyTexture;
+            a.defaultDesc = "ChangeDresser.EmptyDesc".Translate();
+            a.defaultLabel = "ChangeDresser.Empty".Translate();
+            a.activateSound = SoundDef.Named("Click");
+            a.action =
+                delegate { this.EmptyApparel(); };
+            a.groupKey = groupKey;
+            ++groupKey;
+            l.Add(a);
 
             a = new Command_Action();
             a.icon = WidgetUtil.collectTexture;
