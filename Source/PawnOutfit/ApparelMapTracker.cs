@@ -126,12 +126,12 @@ namespace ChangeDresser
                     {
                         this.mapLookup = new Dictionary<Apparel, ApparelMap>();
                     }
-                    
+
                     foreach (ApparelMap ac in this.l)
                     {
                         try
                         {
-                            if (ac != null && ac.Apparel != null)
+                            if (ac != null && ac.Apparel != null && ac.Map != null && !ac.Map.Disposed)
                             {
                                 this.mapLookup.Add(ac.Apparel, ac);
                             }
@@ -145,6 +145,7 @@ namespace ChangeDresser
                     }
                 }
             }
+
 
             if ((Scribe.mode == LoadSaveMode.Saving ||
                  Scribe.mode == LoadSaveMode.PostLoadInit) && l != null)
