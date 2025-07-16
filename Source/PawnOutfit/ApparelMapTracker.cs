@@ -64,13 +64,13 @@ namespace ChangeDresser
             if (this.mapLookup == null)
                 this.mapLookup = new Dictionary<Apparel, ApparelMap>();
 
-            if (a != null && a.Map != null)
+            if (a != null && a.Map != null && a.Map.IsPlayerHome)
                 this.mapLookup[a] = new ApparelMap(a, a.Map);
         }
 
         public Map GetMap(Apparel a)
         {
-            return a != null && mapLookup?.TryGetValue(a, out var apparelMap) == true && !apparelMap.Map.Disposed
+            return a != null && mapLookup?.TryGetValue(a, out var apparelMap) == true && !apparelMap.Map.Disposed && apparelMap.Map.IsPlayerHome
                 ? apparelMap.Map
                 : Find.AnyPlayerHomeMap ?? Find.CurrentMap;
         }

@@ -46,6 +46,10 @@ namespace ChangeDresser
         // rewrite JobGiver_OptimizeApparel.ApparelScoreGain(pawn, tmpApparel, wornApparelScores)
         public static float ApparelScoreGainAvoidingAutomaticallyDrop(Pawn pawn, Apparel ap, List<float> wornScoresCache)
         {
+            if (WorldComp.CachedCustomApparel.Contains(ap))
+            {
+                return -1000f;
+            }
             if (ap.def == ThingDefOf.Apparel_ShieldBelt && pawn.equipment.Primary != null && pawn.equipment.Primary.def.IsWeaponUsingProjectiles || ap.def.apparel.ignoredByNonViolent && pawn.WorkTagIsDisabled(WorkTags.Violent))
                 return -1000f;
             float num = JobGiver_OptimizeApparel.ApparelScoreRaw(pawn, ap);

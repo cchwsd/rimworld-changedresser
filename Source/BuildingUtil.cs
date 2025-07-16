@@ -30,6 +30,7 @@ namespace ChangeDresser
 
         public static List<T> FindThingsOfTypeNextTo<T>(Map map, IntVec3 position, int distance) where T : Thing
         {
+            
             int minX = Math.Max(0, position.x - distance);
             int maxX = Math.Min(map.info.Size.x, position.x + distance);
             int minZ = Math.Max(0, position.z - distance);
